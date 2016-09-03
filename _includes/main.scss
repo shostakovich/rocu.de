@@ -1,0 +1,37 @@
+$base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$base-font-size:   16px;
+
+html {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  background: #f1f1f1;
+  padding: 1rem;
+}
+
+#l-wrapper, #l-nav {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+#l-wrapper {
+  position: relative;
+  padding-top: 46px;
+}
+
+#l-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1rem;
+  width: 100%;
+  background: #212121;
+
+  > a, a:hover {
+    margin-right: 0.75em;
+    color: #ffffff;
+  }
+
+}
+

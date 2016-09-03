@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de-DE" contenteditable="false">
+<head>
+    <meta charset="utf-8">
+
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% endif %}
+
+    <meta name="author" content="{{ site.author }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <title>{{ page.title }} - {{ site.title }}</title>
+
+    {% include inline_styles.html %}
+
+</head>
+<body>
+    <div id="l-wrapper">
+        {{ content }}
+
+        <nav id="l-nav">
+            <a href="/"><strong>{{ site.title }}</strong></a>
+            <a href="/ueber-mich">Über mich</a>
+            <a href="/imprint">Impressum</a>
+        </nav>
+    </div>
+</body>
+</html>
