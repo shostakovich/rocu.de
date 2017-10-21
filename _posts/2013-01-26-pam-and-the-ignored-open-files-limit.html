@@ -1,0 +1,46 @@
+---
+layout: post
+status: publish
+published: true
+title: PAM and the mysteriously ignored open files limit
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 30
+wordpress_url: http://www.rocu.de/?p=30
+date: '2013-01-26 15:17:00 +0100'
+date_gmt: '2013-01-26 15:17:00 +0100'
+categories:
+- Uncategorized
+tags:
+- post
+comments: []
+---
+<p>A few day ago we received a ton of error notifications that looked like <br />
+this:</p>
+<pre><code>(RSolr::RequestError) "Solr Response: Lock obtain timed out.
+</code></pre>
+<p>The system ran quite nice for quite a long time - so what was wrong?</p>
+<p>It took me quite a while to find the problem. Solr was exceeding the open files limit, so it locked to prevent <br />
+problems.</p>
+<p>But how the hell did it hit the limit? It's increased on all of our servers. But when I checked it was not applied.</p>
+<pre><code>sudo su USERNAME
+ulimit -a
+..
+=&gt; open files                      (-n) 1024
+..
+</code></pre>
+<p>The problem was, that I manually restarted Solr a few days earlier, using a rake task. I did not use sudo but su.</p>
+<p>If you use <strong>su</strong> the users open file limit will not be applied automatically. Have a look into the PAM configuration for su and guess why..</p>
+<pre><code>#Sets up user limits, please uncomment and read /etc/security/limits.conf
+# to enable this functionality.
+# (Replaces the use of /etc/limits in old login)
+# session    required   pam_limits.so
+</code></pre>
+<p>The required line is commented our.</p>
+<p>But even more surprising the file limit is activated in most of the other configuration files like <strong>/etc/pam.d/sudo</strong>. So the problem was really me using su to restart Solr.</p>
+<p>What I ended up doing was adding this file to chef, with the comment removed. I don't like this kind of inconsistency.</p>

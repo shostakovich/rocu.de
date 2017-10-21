@@ -1,0 +1,65 @@
+---
+layout: post
+status: publish
+published: true
+title: Create lorem ipsum text with TextExpander and lorem
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 40
+wordpress_url: http://www.rocu.de/?p=40
+date: '2013-03-26 18:44:00 +0100'
+date_gmt: '2013-03-26 18:44:00 +0100'
+categories:
+- Uncategorized
+tags:
+- command line
+- gem
+- mac
+- post
+- productivity
+- software
+- tapas
+- tool-chain
+comments:
+- id: 29
+  author: S. August
+  author_email: info@augustudios.com
+  author_url: ''
+  date: '2014-03-09 18:03:22 +0100'
+  date_gmt: '2014-03-09 18:03:22 +0100'
+  content: <p>Very nice. Just what I needed.</p>
+---
+<p>Often I need dummy text to fill out a form.</p>
+<p>I use a combination of TextExpander and the Lorem Gem that makes this <br />
+super simple.</p>
+<h2 id="step1installtheloremgem">Step 1: Install the "lorem" gem</h2>
+<p>Install the gem <strong><a href="https://github.com/jnunemaker/lorem">lorem</a></strong> using</p>
+<pre><code>sudo gem install lorem
+</code></pre>
+<p>It's simple to use:</p>
+<pre><code># For 1 paragraph dummy text
+lorem 1 paragraph
+
+# For 140 chars dummy text
+lorem 140 chars
+</code></pre>
+<p>Lorem is a Unix tool - you can combine it with other commands:</p>
+<pre><code>lorem 140 chars | pbcopy
+</code></pre>
+<p>Copies 140 chars into your clipboard.</p>
+<h2 id="textexpanderlorem">Textexpander + Lorem</h2>
+<p>I dont want to go into my Terminal, whenever I fill out a <br />
+form in Chrome, so I created a <a href="http://smilesoftware.com/TextExpander/index.html">TextExpander</a> snippet, that executes lorem <br />
+for me and fills in the dummy text.</p>
+<p><img src="/assets/images/2013-03/lorem_and_textexpander.jpg" /></p>
+<pre><code>#!/bin/bash
+lorem %filltext:name=paragraphs:default=1%
+</code></pre>
+<p>A nice additional feature is that it asks you how many paragraphs of dummy text you want.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Sometimes simple hacks like this save you a lot of time. I hope you find it as useful as me!</p>

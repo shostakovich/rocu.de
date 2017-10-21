@@ -1,0 +1,73 @@
+---
+layout: post
+status: publish
+published: true
+title: IPv6 at home
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 66
+wordpress_url: http://www.rocu.de/?p=66
+date: '2012-10-07 18:29:00 +0200'
+date_gmt: '2012-10-07 18:29:00 +0200'
+categories:
+- Uncategorized
+tags:
+- ipv6
+comments:
+- id: 2
+  author: ndxtreme
+  author_email: dragorth@gmail.com
+  author_url: ''
+  date: '2013-11-16 10:27:34 +0100'
+  date_gmt: '2013-11-16 10:27:34 +0100'
+  content: <p>This was very clear! I will try this now.</p>
+---
+<p>Recently I listened to a fantastic episode of "<a href="http://cre.fm/cre197">Chaosradio Express</a>", that covers IPv6 in great detail. The guest explained how great this is for accessing your home network.</p>
+<p>That's when I decided to set up a free account for IPv6 through IPv4 tunneling at SixXs.</p>
+<h2 id="theresult">The Result</h2>
+<p>Without having to set up dyndns I can just do:</p>
+<pre><code>$ ssh mbair.zipf
+</code></pre>
+<p>And reach my machines inside of my home network. Each machine has its own public IP. Thats exactly how it's supposed to be..</p>
+<p>This article describes how you can do the same.</p>
+<h2 id="setupthefirsttunnel">Set up the first tunnel</h2>
+<p>Its relatively simple. Here are the steps I had to do until it worked.</p>
+<ul>
+<li>sign up on <a href="http://www.sixxs.net/signup/">this</a> page.</li>
+<li>confirm your email-address</li>
+<li>wait until SIxXs activates your account</li>
+<li><a href="https://www.sixxs.net/home/requesttunnel/">Request a tunnel</a> (AYIYA variant)</li>
+<li>wait unitl SixXS activates the tunnel</li>
+<li>download the <a href="http://tuntaposx.sourceforge.net/">tunnel driver for Mac OS X</a></li>
+<li>alt-klick on the pkg and install it</li>
+<li>brew install aiccu</li>
+<li>set user/pw in /usr/local/etc/aiccu.conf with your login</li>
+<li>set ipv6_interface in your aicuu.conf to tun0</li>
+<li>restart you're Mac</li>
+<li><strong>Dont forget to turn on your firewall. You have your own public IP in a minute</strong></li>
+<li>
+<p>Last but not least start the tunnel:</p>
+<p>sudo /usr/local/sbin/aiccu start</p>
+</li>
+</ul>
+<p>You should have connectivity now. You can check it by pinging another IPv6 enabled host. For example:</p>
+<pre><code>ping6 google.com
+PING6(56=40+8+8 bytes) 2001:4dd0:ff00:f7e::2 --&gt; 2a00:1450:4016:800::1003
+16 bytes from 2a00:1450:4016:800::1003, icmp_seq=0 hlim=55 time=80.803 ms
+16 bytes from 2a00:1450:4016:800::1003, icmp_seq=1 hlim=55 time=116.723 ms
+16 bytes from 2a00:1450:4016:800::1003, icmp_seq=2 hlim=55 time=80.783 ms
+16 bytes from 2a00:1450:4016:800::1003, icmp_seq=3 hlim=55 time=77.813 ms
+</code></pre>
+<h2 id="settingupthesecondtunnel">Setting up the second tunnel</h2>
+<p>Sixxs has a credit system, in order to only give ressources to user, who really use IPv6 it. You have keep your first tunnel active for about one week, before you can request the second tunnel.</p>
+<p>This one you can use for you devices at home.</p>
+<p>Aftwerwads you're done. For convenience you might want to add an entry to your /etc/hosts.</p>
+<pre><code>2a00:4aa0:4016:fba::2 homeserver
+</code></pre>
+<p>Done.</p>
+<p>I hope you find this as usefull as I do.</p>

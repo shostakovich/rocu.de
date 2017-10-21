@@ -1,0 +1,82 @@
+---
+layout: post
+status: publish
+published: true
+title: How to prevent yourself from force pushing to master
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 36
+wordpress_url: http://www.rocu.de/?p=36
+date: '2013-03-19 20:17:00 +0100'
+date_gmt: '2013-03-19 20:17:00 +0100'
+categories:
+- Uncategorized
+tags:
+- command line
+- dotfiles
+- force push
+- git
+- post
+comments: []
+---
+<p>I am pretty reckless sometimes. I forced pushed to master several days in a row.</p>
+<p>What does a real programmer do? - He writes a script that prevents him from doing it ever again, of course..</p>
+<p>For the longest time this was a <a href="http://stackoverflow.com/questions/7419244/elegant-solution-to-prevent-force-push-on-master-only">little complicated</a> - you had to <br />
+install a hook onto the remote repro. For Git &gt;1.8.2, there's a pre-push hook that was just perfect for my script.</p>
+<p>If the hook returns an error the push is not executed.</p>
+<h2 id="thescript">The script</h2>
+<p>So this is the git hook i came up with.</p>
+<pre><code class="lang-ruby">#!/usr/bin/env ruby
+# Pre-push hook that rejects force pushes to master.
+# Requires Git &gt; 1.8.2
+
+class PushRejecter  
+  def run
+    if pushing_to?(:master) and forced_push?
+      reject
+    else
+      allow
+    end
+  end
+
+  def pushing_to?(branch)
+    `git branch | grep "*" | sed "s/* //"`.match(branch.to_s)
+  end
+
+  def forced_push?
+    `ps -ocommand= -p #{Process.ppid}`.match(/force|pfush/)
+  end
+
+  def reject
+    puts "Force push to master rejected."
+    exit(1)
+  end
+
+  def allow
+    exit(0)
+  end
+end
+
+PushRejecter.new.run  
+</code></pre>
+<p>Ignore the over engineering please..</p>
+<p>If the current branch is master and i am force pushing it does return an error and the push is not executed.</p>
+<h2 id="howtoinstallit">How to install it</h2>
+<p>All my hooks are stored in a folder called <strong><a href="https://github.com/shostakovich/dotfiles/tree/master/home/.git_template/hooks">~/.git_template</a></strong>.</p>
+<p>It is configured as my template directory for git:</p>
+<pre><code>[init]
+  templatedir = ~/.git_template
+</code></pre>
+<p>In order to activate the hook you have to go into all your existing repros and execute</p>
+<pre><code>git init
+</code></pre>
+<p>This will install the hook for you. As I mentioned you need Git &gt;1.8.2.</p>
+<p>Alternatively you could place the hook in the <strong>.git/hooks/</strong> directory manually in each of your repros.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I am more confident, that I will not cripple a master branch again. A nice feeling. If you like to have a look at the rest of my setup I recommend a look at <br />
+<a href="https://github.com/shostakovich/dotfiles">my dotfiles</a>.</p>

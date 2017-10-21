@@ -1,0 +1,66 @@
+---
+layout: post
+status: publish
+published: true
+title: My home is my castle - How to manage and share your dotfiles using homesick
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 60
+wordpress_url: http://www.rocu.de/?p=60
+date: '2013-01-22 17:50:00 +0100'
+date_gmt: '2013-01-22 17:50:00 +0100'
+categories:
+- Uncategorized
+tags:
+- post
+comments:
+- id: 32
+  author: Colin OBrien
+  author_email: colin@studiotaraz.com
+  author_url: ''
+  date: '2013-06-29 22:28:09 +0200'
+  date_gmt: '2013-06-29 22:28:09 +0200'
+  content: <p>Thanks. Better help than the original repo!</p>
+---
+<p><img src="/assets/images/2013-01/castle.jpg" alt="" /><br />
+<em>Castle 11 from <a href="http://www.flickr.com/photos/billward/3393266991/">Bill Ward's Brickpile</a>. (CC BY 2.0)</em></p>
+<p>Since quite a while I try to find a good solution for sharing my dotfiles between my different computers.</p>
+<p><a href="http://www.rocu.de/how-to-setup-your-mac-automatically-with-chef/">I started with chef</a>. - Unfortunately this did not work so well. Especially if you also want to use your dotfiles on a server. Also it feelt a little complicated.</p>
+<p>The next approach I took was putting my dotfiles into my Dropbox and symlink them. This worked ok. But Dropbox on a server? No way.</p>
+<p>So I keept looking. A few days ago I stumbled over <br />
+<a href="https://github.com/technicalpickles/homesick">homesick</a> - an amazing rubygem that manages your dotfiles.</p>
+<h2 id="howtosetitup">How to set it up</h2>
+<p>First install homesick:</p>
+<pre><code>gem install homesick
+</code></pre>
+<p>Now create a "castle". A castle is a collection of dotfiles.</p>
+<pre><code>homesick generate ~/dotfiles
+</code></pre>
+<p>This creates a git repro with a /home folder inside. Just put your dotfiles / dotfolders in there. Then push the stuff to Github.</p>
+<p>Now install the castle with homesick.</p>
+<pre><code>homesick clone https://github.com/foo/dotfiles.git
+</code></pre>
+<p>Now let homesick do its magic.</p>
+<pre><code>homesick symlink dotfiles
+</code></pre>
+<p>All the dotfiles from within this castle will be symlinked.</p>
+<h2 id="thisisawesome">This is awesome!</h2>
+<ul>
+<li>You feel at home at each of your servers in no time</li>
+<li>You share your dotfiles with the world</li>
+<li><a href="http://dotfiles.github.io/">You can learn from others and refine your files</a></li>
+<li>You can put essential little scripts into a .bin directory.</li>
+<li>The castle concept allows you to try someone elses dotfiles</li>
+</ul>
+<h2 id="awordofcaution">A word of caution</h2>
+<p>Please do not put sensitive informations into you dotfiles. <br />
+Especially ssh keys, bash histories and passwords in configuration <br />
+files do not belong on Github.</p>
+<h2 id="tryit">Try it!</h2>
+<p>Seriousely. It's magical. This is one of those things that you try out and you ask yourself how you could possibly live without it.</p>
+<p>Interested? Have a look <a href="https://github.com/shostakovich/dotfiles">at my dotfiles</a>.</p>

@@ -1,0 +1,174 @@
+---
+layout: post
+status: publish
+published: true
+title: Reading Set.rb -  tipps for working with Ruby sets.
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 80
+wordpress_url: http://www.rocu.de/?p=80
+date: '2012-10-13 18:06:00 +0200'
+date_gmt: '2012-10-13 18:06:00 +0200'
+categories:
+- Uncategorized
+tags:
+- post
+- programming
+- ruby
+- set
+comments:
+- id: 3
+  author: tomjoro
+  author_email: tomjoro@gmail.com
+  author_url: ''
+  date: '2013-08-13 11:08:43 +0200'
+  date_gmt: '2013-08-13 11:08:43 +0200'
+  content: '<p>Great article! Just what i was looking for.. Am trying to wean myself
+    off of Array and include? and use Set and <br>SortedSet instead. One small correction
+    in the examples (which confused me a little and made me check...):</p><p>The operation:
+    a - [3] should have had result {1,2} and not {1,3}<br></p>'
+- id: 4
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-08-19 16:31:18 +0200'
+  date_gmt: '2013-08-19 16:31:18 +0200'
+  content: <p>Thanks for your comment and the correction. I fixed the example already
+    :)</p>
+---
+<p>I like to read code. Often I take notes and it's a shame that I did never share them. But it's never to late to start.</p>
+<p>So here are some notes on Ruby's set.rb. I hope you in turn share an interesting read with the world ;)</p>
+<h2 id="howtoinitializeaset">How to initialize a set</h2>
+<pre><code class="`lang-ruby">def initialize(enum = nil, &amp;block)  
+  @hash ||= Hash.new
+
+  enum.nil? and return
+
+  if block
+    do_with_enum(enum) { |o| add(block[o]) }
+  else
+    merge(enum)
+  end
+end  
+</code></pre>
+<p>Ok much to notice here:</p>
+<ul>
+<li>A Set uses a hash internally to avoid duplicates</li>
+<li>Per default the merge method will just add() to the hash</li>
+<li>Interestingly enough you can pass a block to prepare the data</li>
+</ul>
+<p>Some examples what this means:</p>
+<pre><code>Set.new
+ =&gt; #&lt;Set: {}&gt;
+
+ Set.new([1,2,2,3])
+ =&gt; #&lt;Set: {1, 2, 3}&gt;
+
+ Set.new(["ape", "APE", "aPe"]) { |val| val.downcase  }
+ #&lt;Set: {"ape"}&gt;
+</code></pre>
+<p>A second possibility is hidden at the bottom of the file:</p>
+<pre><code class="lang-ruby">module Enumerable  
+  def to_set(klass = Set, *args, &amp;block)
+    klass.new(self, *args, &amp;block)
+  end
+end  
+</code></pre>
+<p>Some examples:</p>
+<pre><code>%w{hello, hello, you}.to_set
+=&gt; #&lt;Set: {"hello,", "you"}&gt;
+
+ %w{hello, hello, world, "!"}.to_set {|val| val.upcase }
+ =&gt; #&lt;Set: {"HELLO,", "WORLD,", ""!""}&gt;
+</code></pre>
+<p>Here is a third way:</p>
+<pre><code class="lang-ruby">def self.[](*ary)  
+  new(ary)
+end  
+</code></pre>
+<p>This is pretty nice trick. It produces a nice shortcut to create a set.</p>
+<pre><code>Set[1,2,3,4]
+#&lt;Set: {1, 2, 3, 4}&gt;
+</code></pre>
+<h2 id="setarithmeticinsetrb">Set arithmetic in set.rb</h2>
+<p>A  nice feature of sets is, that they support set arithmetic. The implementation is pretty straightforward, this is one of the instances where Ruby's syntax really shines :)</p>
+<pre><code class="lang-ruby">  # given enumerable object.
+  def |(enum)
+    dup.merge(enum)
+  end
+  alias + |             ##
+  alias union |         ##
+
+  # Returns a new set built by duplicating the set, removing every
+  # element that appears in the given enumerable object.
+  def -(enum)
+    dup.subtract(enum)
+  end
+  alias difference -    ##
+
+  # Returns a new set containing elements common to the set and the
+  # given enumerable object.
+  def &amp;(enum)
+    n = self.class.new
+    do_with_enum(enum) { |o| n.add(o) if include?(o) }
+    n
+  end
+  alias intersection &amp;  ##
+
+  # Returns a new set containing elements exclusive between the set
+  # and the given enumerable object.  (set ^ enum) is equivalent to
+  # ((set | enum) - (set &amp; enum)).
+  def ^(enum)
+    n = Set.new(enum)
+    each { |o| if n.include?(o) then n.delete(o) else n.add(o) end }
+    n
+  end
+</code></pre>
+<p>Some examples:</p>
+<h3 id="merging">Merging</h3>
+<pre><code>a = Set["a", "b", "c"]
+ =&gt; #&lt;Set: {"a", "b", "c"}&gt;
+
+b = Set["d", "e"]
+ =&gt; #&lt;Set: {"d", "e"}&gt;
+
+a | b
+ =&gt; &lt;Set: {"a", "b", "c", "d", "e"}&gt;
+</code></pre>
+<h3 id="substractinganotherenumerable">Substracting another enumerable</h3>
+<pre><code>a = Set[1, 2, 3]
+=&gt; #&lt;Set: {1, 2, 3}&gt;
+
+a - [3]
+=&gt; #&lt;Set: {1, 2}&gt;
+</code></pre>
+<h3 id="intersectionbetweenasetandanarray">Intersection between a set and an array</h3>
+<pre><code>a = Set[2,3,4]
+ =&gt; #&lt;Set: {2, 3, 4}&gt;
+
+ b &amp; [1,2,3]
+ =&gt; #&lt;Set: {2, 3}&gt;
+</code></pre>
+<p>I think you get the idea. For some problems, this kind of arithmethic is ideal.</p>
+<h2 id="setisjustanotherenum">Set is just another enum</h2>
+<p>Of course it might be obvious to you, if you are not new to Ruby :) Set is just another enumerable. It is interchangable with an array for example.</p>
+<p>Another nice trait of course is, that you have all the nice methods that come with enumerables at your disposal, wen working with a set.</p>
+<p>I highly recommend you reading the <a href="http://ruby-doc.org/core-1.9.3/Enumerable.html">enumerable documentation</a>, since this is something out of scope for this little article.</p>
+<h2 id="randomstuffaboutsetrb">Random stuff about set.rb</h2>
+<ul>
+<li>A SortedSet exists as well</li>
+<li>There is a RestrictedSet, that is commented - wtf?</li>
+<li>There are many tests for set within the same file. So scroll down for more examples</li>
+</ul>
+<h2 id="bottomline">Bottom line</h2>
+<p>Sets are awesome. Sometimes it makes sense to write this kind of arithmetical functions.</p>
+<p>This class is really big, but it still makes sense this way. The functions are very small and focused and its quite simple to read.</p>
+<p>Set uses some nice tricks. I really love the <strong><em>def self.[]</em></strong> trick for example.</p>
+<p>One of the biggest suprises for me was, that you can pass a block to the constructor. I'm not sure if I am a fan of that.</p>
+<p>I loved the implementation of set arithmetics - its simple and beautiful.</p>
+<p>Reading this file was fun, you <a href="https://github.com/ruby/ruby/blob/ruby_1_9_3/lib/set.rb">should read it as well</a></p>

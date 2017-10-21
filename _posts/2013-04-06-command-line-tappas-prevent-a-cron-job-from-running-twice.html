@@ -1,0 +1,42 @@
+---
+layout: post
+status: publish
+published: true
+title: How to prevent a cron job from running multiple times
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 38
+wordpress_url: http://www.rocu.de/?p=38
+date: '2013-04-06 17:42:00 +0200'
+date_gmt: '2013-04-06 17:42:00 +0200'
+categories:
+- Uncategorized
+tags:
+- command line
+- post
+- tapas
+comments:
+- id: 28
+  author: Gwyneth Llewelyn
+  author_email: gwyneth.llewelyn@gwynethllewelyn.net
+  author_url: ''
+  date: '2014-02-13 02:47:33 +0100'
+  date_gmt: '2014-02-13 02:47:33 +0100'
+  content: <p>Thanks! So simple, but effective! I always wondered how this was done,
+    since I saw some hosting providers who offered this "protection" and was a bit
+    clueless on how to implement it...</p>
+---
+<p>Sometimes a cron job might run slower, than you anticipated and many instances of it stack up.</p>
+<p>You can increase the time interval during starts of the cron job - this can lead to problems in the future however.</p>
+<p>Fortunately there's a easy and clean fix.</p>
+<p>Just replace your cronjob with this:</p>
+<pre><code>/usr/bin/flock -n /var/lock/&lt;foobar&gt; &lt;long-running-task&gt;
+</code></pre>
+<p>Whenever your cron job is started a lock file will be created and no other instance can start.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This a simple remedy for colliding cron job's. I use it frequently.</p>

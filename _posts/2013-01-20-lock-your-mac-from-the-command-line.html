@@ -1,0 +1,41 @@
+---
+layout: post
+status: publish
+published: true
+title: Lock your mac from the command line
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 52
+wordpress_url: http://www.rocu.de/?p=52
+date: '2013-01-20 13:08:00 +0100'
+date_gmt: '2013-01-20 13:08:00 +0100'
+categories:
+- Uncategorized
+tags:
+- command line
+- lock screen
+- mac os x
+- pomodoro
+- post
+comments: []
+---
+<p>During my daily work I try to take breaks and move frequently. In order for <br />
+me to leave the room I have to ensure that my computer is locked.</p>
+<p>I wrote a little script which does exactly this.</p>
+<p>I only have to enter</p>
+<pre><code>lock
+</code></pre>
+<p>and my Mac starts to lock.</p>
+<p>A nice varitation of this is to use this functionallity together with <br />
+my Pomodoro app. It locks my computer after 25 minutes of work for me. <br />
+Thats a pretty effective reminder to move ;)</p>
+<p>Enough said. Here is the code:</p>
+<pre><code class="lang-bash">#!/bin/sh
+/System/Library/CoreServices/Menu
+Extras/User.menu/Contents/Resources/CGSession -suspend  
+</code></pre>

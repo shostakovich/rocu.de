@@ -1,0 +1,76 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Command line tapas: Feel like a hacker with cluster ssh'
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 62
+wordpress_url: http://www.rocu.de/?p=62
+date: '2013-01-25 18:37:00 +0100'
+date_gmt: '2013-01-25 18:37:00 +0100'
+categories:
+- Uncategorized
+tags:
+- cluster ssh
+- command line
+- devops
+- pair programming
+- post
+- ssh
+- tapas
+comments:
+- id: 154
+  author: ives
+  author_email: ives.stoddard@gmail.com
+  author_url: ''
+  date: '2016-03-02 22:52:13 +0100'
+  date_gmt: '2016-03-02 22:52:13 +0100'
+  content: "as an update to anyone reading this, there are two other alternatives:\r\n\r\n1)
+    iTerm2 native support for terminal multiplexing (only works locally)\r\n2) tmuxinator
+    for tmux\r\n\r\nWhile you shouldn't be logging into servers on a regular basis,
+    tmuxinator works also works really well on a gateway server, allowing you to set
+    up aliases for devs to get access to all servers in an environment. It also supports
+    grouping into tmux windows (one window = background job servers, another window
+    = web/app servers, etc.).\r\n\r\nThis can also work really well if you are bundling
+    a cluster in vagrant, where someone checking out a configuration can just run
+    \"mux \".\r\n\r\nhttps://github.com/tmuxinator/tmuxinator\r\nhttp://nils-blum-oeste.net/getting-started-with-tmux/\r\n\r\nIt
+    also supports send-keys, so you can set up dev projects and automatically create
+    3 panes, loading vi into one and launching services in another others (guard for
+    rails dev, npm, mysql, docker containers, docker-compose, whatever).\r\n\r\nhttp://zdk.github.io/manage-different-tmux-configurations-with-tmuxinator"
+---
+<p>A few months ago I paired on a chef recipe with a colleague. After we <br />
+uploaded the cookbook we wanted to try this stuff out on a few nodes.</p>
+<p>Until then I would have kind of done it completely manually. But he <br />
+entered a command and the following happend:</p>
+<p><img src="/assets/images/2013-01/csshx.jpg" alt="ClusterSSH in action" /></p>
+<p>Wow. He just ssh'ed into all of these servers. The next part looked even <br />
+cooler. He started typing and magically the text appeared in all the <br />
+terminals. He pressed enter and the chef run started. It looked awesome. Chef runs produce quite a lot of text ;)</p>
+<p>I was hooked and asked him what he just did. "That's just ClusterSSH", he <br />
+replied, "I use it all the time".</p>
+<blockquote>
+<p><a href="http://clusterssh.sourceforge.net/">ClusterSSH</a> is a tool for making the same change on multiple servers at<br />
+  the same time. The 'cssh' command opens an administration console and<br />
+  an xterm to all specified hosts. Any text typed into the<br />
+  administration console is replicated to all windows. All windows may<br />
+  also be typed into directly.</p>
+</blockquote>
+<p>For the Mac there is a similar tool called <a href="http://code.google.com/p/csshx/">csshx</a> thats what I ended <br />
+up using.</p>
+<p>It works like a charm. You just specify your clusters in a clusterfile.</p>
+<pre><code>cluster1 host1 host2
+cluster2 host3 host4
+</code></pre>
+<p>Now you just enter:</p>
+<pre><code>csshx cluster1
+</code></pre>
+<p>That's it.</p>
+<p>I use <a href="http://code.google.com/p/csshx/">csshx</a> during every maintainance window. I love <br />
+pair programming. Makes you realize that things that are obvious to <br />
+yourself are not obvious to your colleagues.</p>

@@ -1,0 +1,197 @@
+---
+layout: post
+status: publish
+published: true
+title: How to install 'Settlers II' on Mac OS X
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 24
+wordpress_url: http://www.rocu.de/?p=24
+date: '2013-02-25 19:48:00 +0100'
+date_gmt: '2013-02-25 19:48:00 +0100'
+categories:
+- Uncategorized
+tags:
+- mac os x
+- post
+- the settlers
+comments:
+- id: 13
+  author: Arve
+  author_email: ahembre@hotmail.com
+  author_url: ''
+  date: '2013-06-13 21:13:51 +0200'
+  date_gmt: '2013-06-13 21:13:51 +0200'
+  content: <p>Does this work? I also have Mac OS X 10.6.8.<br>Can I play multiplayer
+    with a friend? On the same Mac or could he play on his mac over internet?</p><p>Thanks
+    for answer dude!</p>
+- id: 14
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-06-14 16:16:40 +0200'
+  date_gmt: '2013-06-14 16:16:40 +0200'
+  content: '<p>Hey Arve. I am not sure if Boxer works for 10.6.8.</p><p>Apparently
+    there is some kind of networking support. You can read more about this in the
+    FAQ of Boxer.</p><p><a href="http://boxerapp.com/guide/advanced#ipx-networking"
+    rel="nofollow">http://boxerapp.com/guide/adva...</a></p><p>As this networking
+    works over IP I guess you could relatively simply play in a local LAN on 2 different
+    Macs.</p><p>On the internet the one of you both who acts as host for the session
+    has to forwards ports: 5479 and 5482(TCP) on your router to the local IP of your
+    network. Your friend then can enter your public facing ip.</p><p>In order to find
+    out this IP: <a href="http://www.whatismyip.com/" rel="nofollow">http://www.whatismyip.com/</a></p><p>Here
+    is a guide how you forward ports on a router: <a href="http://portforward.com/english/routers/port_forwarding/"
+    rel="nofollow">http://portforward.com/english...</a></p>'
+- id: 15
+  author: Vyasa
+  author_email: vyasa@hotmail.fr
+  author_url: ''
+  date: '2013-06-15 16:35:01 +0200'
+  date_gmt: '2013-06-15 16:35:01 +0200'
+  content: <p>Same question here. Does this work with OS 10.7.5?</p>
+- id: 16
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-06-15 16:50:29 +0200'
+  date_gmt: '2013-06-15 16:50:29 +0200'
+  content: <p>The current version of Boxer works on OS X 10.5 - 10.8</p>
+- id: 17
+  author: HarveyOwen
+  author_email: erik@harveys.no
+  author_url: ''
+  date: '2013-06-16 18:00:55 +0200'
+  date_gmt: '2013-06-16 18:00:55 +0200'
+  content: <p>Hi Robert, I've followed every step until</p><p>Copy the Settlers II
+    folder from Contents/Resources/drive_c/COG GAMES/ into another Folder</p><p>...which
+    I really can't find - after "showing package contents" I go Contents --&gt; Resources
+    --&gt; drive_c (through "wineprefix"), only to realise that there is no next step
+    named "COG Games" or "Settlers II folder". What am I doing wrong?</p>
+- id: 18
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-06-17 15:43:29 +0200'
+  date_gmt: '2013-06-17 15:43:29 +0200'
+  content: <p>Hey - I just followed my own turorial  again. It works.</p><p>* It is
+    important that you install The Settlers with the installer. Otherwise the bottle
+    will contain no files.<br>* It is important that you have a look into the APP
+    that Wine Bottler creates. For me it is called "My Wine App". You hav to save
+    it somewhere during the process.<br>* If you did not download Settlers II from
+    COG you might want to look into the programms folder instead.</p><p>Please let
+    me know what went wrong if you find out - so I can improve the text ;)</p>
+- id: 19
+  author: HarveyOwen
+  author_email: erik@harveys.no
+  author_url: ''
+  date: '2013-06-18 19:20:04 +0200'
+  date_gmt: '2013-06-18 19:20:04 +0200'
+  content: '<p>Half way through the installing process/creating the app - using Winebottler,
+    ''new prefix (default)'', the .exe-file from the download from GOG, winetrick
+    ''d3dx9_36'', there is an ''error'' saying: ''Runtime error (at 140:148): Access
+    violation at address 47A40083 in module  ''gdiplus.dll''. Read of address 0020B924".</p><p>I
+    press ''OK'' to the error and then have to ''Select Startfile'' and choose between
+    two options; ''Winefile'' or ''Program Files/Internet Explorer/iexplorer.exe''
+    - I''ve tried with both and the installation finshes with ''prefix created sucessfully''.
+    When trying to ''show package contents'' looking into the created app, I find
+    Contents --&gt; Resources --&gt; drive_c (but only through ''wineprefix''), but
+    from here I can only choose between ''program files'', ''users'' or ''windows''.
+    None of these contains anything regarding the game... Any other ideas?</p><p>I
+    really appreciate all your help, Robert!</p>'
+- id: 20
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-06-20 15:18:13 +0200'
+  date_gmt: '2013-06-20 15:18:13 +0200'
+  content: <p>Hi - unfortunately I can not replicate this. So here are some other
+    ideas to get it working:</p><p>* Install it using the Crossover Mac trial (<a
+    href="http://www.codeweavers.com/products/)" rel="nofollow">http://www.codeweavers.com/pro...</a></p><p>*
+    Or ask a friend to install it on his Windows PC<br>* Or use VirtualBox + an old
+    Windows CD</p><p>It's only important that you get the folder at the end. At this
+    stage you can import it into BoxerApp.</p><p>Hope that helps ;)</p>
+- id: 21
+  author: Kristoffer
+  author_email: yaja@mailinator.com
+  author_url: ''
+  date: '2013-11-01 16:22:33 +0100'
+  date_gmt: '2013-11-01 16:22:33 +0100'
+  content: <p>Thanks!</p>
+- id: 22
+  author: Le
+  author_email: leolo@live.no
+  author_url: ''
+  date: '2013-11-17 12:35:48 +0100'
+  date_gmt: '2013-11-17 12:35:48 +0100'
+  content: <p>Hi, I have The Settlers 2 for mac. It does not work on a new mac, only
+    on the old one. Is this tutorial for using an old copy of the game and being able
+    to play it on newer systems, or is it meant to be used if you have the PC version
+    of the game and want to use it on a mac?</p>
+- id: 23
+  author: xfm
+  author_email: xfm2@o2.pl
+  author_url: ''
+  date: '2014-03-14 19:33:58 +0100'
+  date_gmt: '2014-03-14 19:33:58 +0100'
+  content: <p>Doesn't work on mavericks, please help.</p>
+- id: 24
+  author: xfm
+  author_email: xfm2@o2.pl
+  author_url: ''
+  date: '2014-03-14 19:43:55 +0100'
+  date_gmt: '2014-03-14 19:43:55 +0100'
+  content: <p>just kidding, everything works fine :))</p>
+- id: 25
+  author: Settlers 2 Gold on OSX | Legendiary
+  author_email: ''
+  author_url: http://www.legendiary.at/2015/09/27/settlers-2-gold-on-osx/
+  date: '2015-09-27 18:22:24 +0200'
+  date_gmt: '2015-09-27 18:22:24 +0200'
+  content: '[&#8230;] found this nifty howto and did these steps for a German [&#8230;]'
+- id: 328
+  author: Honey
+  author_email: 806mgb38b9m@yahoo.com
+  author_url: http://hkslrhmpxsy.com
+  date: '2016-05-17 10:32:54 +0200'
+  date_gmt: '2016-05-17 10:32:54 +0200'
+  content: Kendal &#8212; My suggestion would be to dine table-service as much as
+    you can, and make sure to speak with the chef to share your diet requirements.
+    He/She can then create a meal for you that fits your speiaficitcons. Counter-service
+    can be difficult as a vegan, though it&#8217;s getting better. Check out the menus
+    at counter-service locations before you go to see what might fit the bill. Buffets
+    might also be a good option, as you&#8217;ll be able to eat as much as you want
+    of the foods that fit your needs.
+---
+<p>I recently installed "Die Siedler II" on Mac OS X - this is how I pulled <br />
+it of.</p>
+<ul>
+<li>If you don't have the game - <a href="http://www.gog.com/gamecard/the_settlers_2_gold_edition">go buy it</a></li>
+<li>Open <a href="http://winebottler.kronenberg.org/">WineBottler</a></li>
+<li>Create custom prefix</li>
+<li>Select the .exe file and check one of the DirectX dll's</li>
+</ul>
+<p><img /></p>
+<ul>
+<li>Install it</li>
+<li>Now right click on the program WineBottler created</li>
+<li>Open the package</li>
+<li>Copy the Settlers II folder from Contents/Resources/drive_c/COG<br />
+GAMES/ into another Folder  </li>
+<li>Download <a href="http://boxerapp.com/">BoxerApp</a></li>
+</ul>
+<p><img /></p>
+<ul>
+<li>Click onto "Import new Game"</li>
+<li>Drag the Settlers II folder onto the window</li>
+</ul>
+<p><img /></p>
+<ul>
+<li>Thats it! Launch the game!</li>
+</ul>
+<p><img /></p>
+<p>Well. That's it! Enjoy.</p>

@@ -1,0 +1,224 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Ruby: Reading the source code of OpenStruct.'
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 86
+wordpress_url: http://www.rocu.de/?p=86
+date: '2012-12-01 08:16:00 +0100'
+date_gmt: '2012-12-01 08:16:00 +0100'
+categories:
+- Uncategorized
+tags:
+- post
+comments: []
+---
+<p><strong><em>Ruby version: 1.9.3-p327</em></strong></p>
+<p><img alt="Open Struct" /></p>
+<p>Here is another read of a Ruby core class: OpenStruct.</p>
+<h2 id="initializinganopenstruct">Initializing an OpenStruct</h2>
+<p>You can create an OpenStuct using hash - or without any attributes.</p>
+<pre><code class="lang-ruby">def initialize(hash=nil)  
+  @table = {}
+  if hash
+    hash.each_pair do |k, v|
+    k = k.to_sym
+    @table[k] = v
+    new_ostruct_member(k)
+  end
+ end
+</code></pre>
+<p>If you use a hash openstruct will go ahead and store all the key/value pairs in an internal hash called table.</p>
+<pre><code class="lang-ruby">def new_ostruct_member(name)  
+  name = name.to_sym
+  unless respond_to?(name)
+    define_singleton_method(name) { @table[name] }
+    define_singleton_method("#{name}=") { |x| modifiable[name] = x }
+  end
+  name
+end  
+protected :new_ostruct_member  
+</code></pre>
+<p>It will also create getters / setters using <a href="http://apidock.com/ruby/Object/define_singleton_method">define<em>singleton</em>method</a>.</p>
+<pre><code>require 'ostruct'
+coordinate = OpenStruct.new(:x =&gt; 1, :y =&gt; 2)
+#&lt;OpenStruct x=1, y=2&gt;
+
+OpenStruct.new
+#&lt;OpenStruct&gt;
+</code></pre>
+<h2 id="modifiable">Modifiable</h2>
+<p>But wait.. What does this modifiable thing in the dynamic setter do? Lets have a look at the code.</p>
+<pre><code class="lang-ruby">def modifiable  
+  begin
+    @modifiable = true
+   rescue
+     raise TypeError, "can't modify frozen #{self.class}", caller(3)
+   end
+   @table
+end  
+protected :modifiable  
+</code></pre>
+<p>Huh? It sets a attribute modifiable and if it does not succeed it throws an exception? If it is modifiable it returns the @table?</p>
+<p>Well to be honest this is not clear at all. The text of the exception states that this is about frozen objects. Hm lets validate this:</p>
+<pre><code>foo = OpenStruct.new
+ #&lt;OpenStruct&gt;
+foo.send(:modifiable)
+# {}
+foo.freeze
+# nil
+foo.send(:modifiable)
+# TypeError: can't modify frozen OpenStruct
+</code></pre>
+<p>Ah! - It acts as kind of a gatekeeper to the table, by preventing you from changing the OpenStruct if it's frozen. I'm not sure if I like this - it not to clear to me - on the other hand it is tell don't ask. I guess I have to think about it.</p>
+<h2 id="methodmissing">Method missing</h2>
+<p>There is another feature of OpenStruct. It has setters for attributes that do not yet exist.</p>
+<pre><code>foo = OpenStruct.new
+#&lt;OpenStruct&gt;
+foo.x = 1
+foo.y = 2
+foo
+#&lt;OpenStruct x=1, y=2&gt;
+</code></pre>
+<p>In Ruby you can achieve this using <strong><em>method_missing</em></strong>.</p>
+<pre><code class="lang-ruby">def method_missing(mid, *args) # :nodoc:  
+  mname = mid.id2name
+  len = args.length
+  if mname.chomp!('=') &amp;&amp; mid != :[]=
+    if len != 1
+      raise ArgumentError, "wrong number of arguments (#{len} for 1)", caller(1)
+    end
+    modifiable[new_ostruct_member(mname)] = args[0]
+  elsif len == 0 &amp;&amp; mid != :[]
+    @table[mid]
+  else
+    raise NoMethodError, "undefined method `#{mid}' for #{self}", caller(1)
+  end
+end  
+</code></pre>
+<p>Hm… Wow there is some stuff I have never seen before. Lets try to read it line by line.</p>
+<p><strong><em>mid.id2name</em></strong> converts the method's id (which is a symbol). Into a string.</p>
+<p>If the method name has a <strong><em>=</em></strong> and only argument <strong><em>new_ostruct_member</em></strong> creates a new entry in the table. Afterwards the value if assigned.</p>
+<p>The elseif block handles reads on attributes that were not defined. Getter method have no arguments of course.</p>
+<pre><code>foo = OpenStruct.new
+#&lt;OpenStruct&gt;
+foo.something_random
+# nil
+</code></pre>
+<p>It looks the <strong><em>mid</em></strong> up in the <strong><em>@table</em></strong>. I have no idea why it does not return nil in the first place here. The effect is the same, because ach time we add a new attributes <strong><em>new_ostruct_member</em></strong> creates dynamic methods. So if the attribute is already defined, we do not end up in method missing.</p>
+<p>For all other functions except: <br />
+* These that have an "=" and one argument<br />
+* And these that have no argument<br />
+* And are not :[], :[]=</p>
+<p>It raises an exception. If you wondering what this caller(1) thing is:</p>
+<blockquote>
+<p>Returns the current execution stack—an array containing strings in the form “file:line” or “file:line: in method’”. The optional start parameter determines the number of initial stack entries to omit from the result.<br />
+  <a href="http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-caller">Link to the Documentation</a></p>
+</blockquote>
+<h2 id="duplicatinganopenstruct">Duplicating an OpenStruct</h2>
+<p>I had quite a hard time of figuring out what the following function was doing. I tried really hard to call it from the console.. :/</p>
+<pre><code class="lang-ruby"> def initialize_copy(orig)
+    super
+    @table = @table.dup
+    @table.each_key{|key| new_ostruct_member(key)}
+  end
+</code></pre>
+<p>Ruby uses <strong><em>initialize_copy</em></strong> whenever you .clone or .dup an object. To get the whole picture read this <a href="http://jonathanleighton.com/articles/2011/initialize_clone-initialize_dup-and-initialize_copy-in-ruby/">great article about initialize<em>dup, initialize</em>clone and initialize_copy</a>!</p>
+<h2 id="inspect">Inspect</h2>
+<pre><code class="lang-ruby">InspectKey = :__inspect_key__ # :nodoc:
+
+def inspect  
+  str = "#&lt;#{self.class}"
+
+  ids = (Thread.current[InspectKey] ||= [])
+  if ids.include?(object_id)
+    return str &lt;&lt; ' ...&gt;'
+  end
+
+  ids &lt;&lt; object_id
+  begin
+    first = true
+    for k,v in @table
+      str &lt;&lt; "," unless first
+      first = false
+      str &lt;&lt; " #{k}=#{v.inspect}"
+    end
+    return str &lt;&lt; '&gt;'
+  ensure
+    ids.pop
+  end
+end  
+alias :to_s :inspect  
+</code></pre>
+<p>The last part of this is straightforward. The method prints all attributes like <strong><em>lenght=21</em></strong>. It separates them by a space and a comma and appends the attribute info to the class name.</p>
+<pre><code>#&lt;OpenStruct name="Brussel Sprouts"&gt;
+</code></pre>
+<p>What this inspect_key stuff is all about? Have a look at this experiment.</p>
+<pre><code>  puts :__inspect_key__
+  # nil
+Thread.new { puts :__inspect_key__ }
+#&lt;Thread:0x007fe2b487b650 sleep&gt;
+</code></pre>
+<p>You see? Every thread has its own key.</p>
+<pre><code>Thread.new do
+    a = OpenStruct.new(:hello =&gt; "foo", :world =&gt; "bar")
+    puts a.inspect
+  end
+#&lt;OpenStruct hello="foo", world="bar"&gt; =&gt; #&lt;Thread:0x007fe2b4817d80 run&gt;
+</code></pre>
+<h2 id="marshallingsupport">Marshalling support</h2>
+<blockquote>
+<p>The marshaling library converts collections of Ruby objects into a byte stream, allowing them to be stored outside the currently active script. This data may subsequently be read and the original objects reconstituted. <a href="http://www.ruby-doc.org/core-1.9.3/Marshal.html">Link to the Documentation</a></p>
+</blockquote>
+<pre><code class="lang-ruby">def marshal_dump  
+  @table
+end
+
+def marshal_load(x)  
+  @table = x
+  @table.each_key{|key| new_ostruct_member(key)}
+end  
+</code></pre>
+<p>I would have called it serialization / deserialization ;) There are 2 function that OpenStruct implements to achieve this.</p>
+<p><strong>*marshal_dump</strong> just returns the table - it's already a hash, so Marshal can handle it.</p>
+<p><strong>marshal_load</strong> just assign this same hash and creates all the required method to access the attributes.</p>
+<p>Lets have a look at this in action.</p>
+<pre><code>point = OpenStruct.new(:x =&gt; 1, :y =&gt; 2)
+#&lt;OpenStruct x=1, y=2&gt;
+
+serialized_point = Marshal.dump(a)
+"x04bU:x0FOpenStruct{a:x06xix06:x06yia"
+
+Marshal.load(serialized_point)
+#&lt;OpenStruct x=1, y=2&gt;
+</code></pre>
+<h2 id="somechangesintrunk">Some changes in trunk</h2>
+<p>The version in trunk is slightly different from the version disscussed here. It contains the functions <strong><em>[]</em></strong> and <strong><em>[]=</em></strong>.</p>
+<pre><code class="lang-ruby"> def [](name)
+  @table[name.to_sym]
+end
+
+def []=(name, value)  
+  modifiable[new_ostruct_member(name)] = value
+end  
+</code></pre>
+<h2 id="lastwords">Last words</h2>
+<p>OpenStruct is quite nice. It comes in handy when you want to replace a hash with a value object. The addition in trunk will make this even easier in the future because it's a drop in replacement for simple cases and the Tests will stay green ;)</p>
+<p>Many people find that the attr_reader part for non-specified attributes is a big problem, when you use OpenStruct. I agree. You have to be aware of this or it will bite you.</p>
+<p>It was fun reading this class. I did't like the <strong><em>modifiable</em></strong> method. It's not really as clear as it could be.</p>
+<ul>
+<li>There's a method called .id2name</li>
+<li>Some random stuff about Threads</li>
+<li>Rubyists call serialization marshalling</li>
+<li>A weired way to detect a frozen object</li>
+<li>Ways to hook into the dup and clone methods</li>
+</ul>
+<p>Go read some code as well! Its a highly educating activity.</p>
+<p>Picture of cup licensed under: <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/">(CC BY-NC-SA 2.0)</a> Licensor: <a href="http://www.flickr.com/photos/from_my_d40/">rebeccaâˆžmahoney</a></p>

@@ -1,0 +1,57 @@
+---
+layout: post
+status: publish
+published: true
+title: Backup a local directory to a FTP server
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 44
+wordpress_url: http://www.rocu.de/?p=44
+date: '2013-04-07 08:28:00 +0200'
+date_gmt: '2013-04-07 08:28:00 +0200'
+categories:
+- Uncategorized
+tags:
+- command line
+- ftp
+- post
+- tapas
+- tools
+comments: []
+---
+<p>I had to backup a local directory to a FTP server.</p>
+<p>My first impulse was to use Rsync but I was out of luck. Rsync doesn't work over FTP since it is a <a href="http://en.wikipedia.org/wiki/Rsync">protocol of it's own</a>.</p>
+<p>That's when I stumbled over <a href="http://lftp.yar.ru/">lftp</a>:</p>
+<blockquote>
+<p><a href="http://lftp.yar.ru/">LFTP</a> is a sophisticated ftp/http client, and a file transfer program supporting a number of network protocols. Like BASH, it has job control and uses the readline library for input. It has bookmarks, a built-in mirror command, and can transfer several files in parallel.</p>
+</blockquote>
+<p>In order to use <a href="http://lftp.yar.ru/">lftp</a> you have to install it using the package manager of your choice.</p>
+<pre><code>brew install lftp
+</code></pre>
+<p>Now you create a simple script. We use the mirror command here in order to sync a local directory onto the server.</p>
+<pre><code>SERVER="your.ftp.server"
+USERNAME="user"
+PASSWORD="pass123"
+
+LOCAL_DIR="/source/dir"
+REMOTE_DIR="/target/dir"
+
+lftp -c "set ftp:list-options -a;
+open ftp://$USERNAME:$PASSWORD@$SERVER;
+lcd $LOCAL_DIR;
+cd $REMOTE_DIR;
+mirror --reverse"
+</code></pre>
+<p>The script uses your credentials to log in to the ftp server. The it starts to mirror your local directory to the directory on the server. The flag  "reverse" is appended to the mirror command because per default lftp mirrors the content from the server into your local directory.</p>
+<p>The mysterious line</p>
+<pre><code>lftp -c "set ftp:list-options -a;
+</code></pre>
+<p>is necessary if you want to transfer hidden files as well and your FTP server does not list them per default.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Often FTP backup space is one of the cheapest ways to back up a server, that's when lftp comes really handy. It is way slower then Rsync - but  works fine in most situations.</p>
+<p>I am glad I have lftp in my toolchain now.</p>

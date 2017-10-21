@@ -1,0 +1,57 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Productivity: Mute tweets without urls in Tweetbot'
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 28
+wordpress_url: http://www.rocu.de/?p=28
+date: '2013-01-27 11:32:00 +0100'
+date_gmt: '2013-01-27 11:32:00 +0100'
+categories:
+- Uncategorized
+tags:
+- mute filter
+- post
+- regex
+- twitter
+comments:
+- id: 26
+  author: NB
+  author_email: nickberger739@gmail.com
+  author_url: ''
+  date: '2013-06-06 12:58:39 +0200'
+  date_gmt: '2013-06-06 12:58:39 +0200'
+  content: <p>This is very helpful - thanks for posting. Here are some other useful
+    ones I stumbled across:</p><p><a href="http://dlo.me/archives/2012/11/26/favorite-mute-filters/"
+    rel="nofollow">http://dlo.me/archives/2012/11...</a></p><p>Any ideas on applying
+    filters to a specific user, rather than your whole timeline?</p>
+- id: 27
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-07-08 17:49:29 +0200'
+  date_gmt: '2013-07-08 17:49:29 +0200'
+  content: '<p>Hi - unfortunately no. You can only mute the whole user.</p><p>Unless
+    of course you write some kind of proxy that filters your twitter Traffic. Unfortunately
+    that task is not too simple: <a href="http://www.devthought.com/2012/01/24/filtering-tweets-for-your-favorite-client-with-node-js/"
+    rel="nofollow">http://www.devthought.com/2012...</a></p>'
+---
+<p><img src="/assets/images/2013-01/tweetbot_filter.jpg" alt="TweetBot mute filter" /></p>
+<p>I spent far to much time on Twitter lately. Time wasted that should be <br />
+used for building stuff. On the other hand I do not <br />
+want to complettely abandon Twitter, because it's a great source of <br />
+new links for me.</p>
+<p>So I decided to filter out all Tweets without URL's.</p>
+<p>I remembered that it was possible using negative lookahead - but frankly <br />
+I never used it. I found the answer on <a href="http://stackoverflow.com/questions/406230/regular-expression-to-match-string-not-containing-a-word">stackoverflow</a>.</p>
+<p>Just add the following filter and you are set:</p>
+<pre><code>^((?!.[a-z]+/).)*$
+</code></pre>
+<p>Feels much better - and I can follow more great people ;)</p>

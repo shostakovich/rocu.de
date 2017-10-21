@@ -1,0 +1,34 @@
+---
+layout: post
+status: publish
+published: true
+title: Save a file as root in vim
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 20
+wordpress_url: http://www.rocu.de/?p=20
+date: '2013-07-06 19:05:00 +0200'
+date_gmt: '2013-07-06 19:05:00 +0200'
+categories:
+- Uncategorized
+tags:
+- command line
+- post
+- vim
+comments: []
+---
+<p>I often edit files without having the right permissions in VIM.</p>
+<p><img src="/assets/images/2013-07/sudo-vim.jpg" alt="VIM can not safe a file" /></p>
+<p>I changed the file and when VIM told me that I did not have the proper permissions to save it, I quit VIM and entered <code>sudo !!</code> to try it again.</p>
+<p>This was of course stupid of me. Currently I try to be more mindful about this kind of problems and to fix them.</p>
+<p>Here's the lines that I just added to my <em>.vimrc</em></p>
+<pre><code>" Use :w!! to save as root!
+cmap w!! w !sudo tee % &gt;/dev/null
+</code></pre>
+<p>When I enter <code>:w!!</code> now VIM saves the file as root.</p>
+<p>I hope I will not encounter this problem again.</p>

@@ -1,0 +1,132 @@
+---
+layout: post
+status: publish
+published: true
+title: How to setup your Mac automatically with chef
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 68
+wordpress_url: http://www.rocu.de/?p=68
+date: '2012-10-01 19:29:00 +0200'
+date_gmt: '2012-10-01 19:29:00 +0200'
+categories:
+- Uncategorized
+tags:
+- chef
+- chef-solo
+- mac
+- mac os x
+- post
+- software
+comments: []
+---
+<p>Recently I joined a team that practices DevOps. That's why I had to learn Chef:</p>
+<blockquote>
+<p>With Chef, you write abstract definitions as source code to describe how you want each part of your infrastructure to be built, and then apply those descriptions to individual servers.</p>
+</blockquote>
+<p>Since I regard my iMac as part of my infrastructure - I decided to give Chef a shot. In this post I explain how I did it.</p>
+<h2 id="bootstrappingchef">Bootstrapping chef</h2>
+<p>Before the first Chef run, you have to prepare youre machine.</p>
+<p>I store my cookbooks on Dropbox. So after installing the OS (manually), I download and install Dropbox.</p>
+<p>After Dropbox finished syncing I run bootstrap.sh :</p>
+<pre><code class="lang-bash">USERNAME=shostakovich
+
+mkdir ~/tmp  
+cd ~/tmp
+
+
+# Install GCC + Git
+
+curl https://github.com/downloads/kennethreitz/osx-gcc-installer/GCC-10.7-v2.pkg &gt; GCC-10.7-v2.pkg  
+    sudo installer -pkg GCC-10.7-v2.pkg -target /
+
+# Install chef
+
+sudo gem install chef
+
+# Prepare Directory for Homebrew
+
+sudo mkdir /usr/local  
+sudo chown -R $USERNAME /usr/local  
+</code></pre>
+<p>This installs a compiler, Homebrew and some dev-tools like GIT on the machine.</p>
+<p>Last but not least bootstrap.sh installs Chef itself.</p>
+<h2 id="installingappspackages">Installing apps &amp; packages</h2>
+<p>I have my standard set of tools. Instead of installing them manually I wanted to use Chef.</p>
+<p>Luckily there are already cookbooks that can install <a href="https://github.com/opscode-cookbooks/dmg">dmg's</a> and apps within <a href="https://github.com/fnichol/chef-zip_app">zip files</a>.</p>
+<p>You just have to download them and then you can specify which apps to <br />
+install:</p>
+<pre><code class="lang-ruby">dmg_package "Google Chrome" do  
+  dmg_name "googlechrome"
+  source "https://dl-ssl.google.com/chrome/mac/stable/GGRM/googlechrome.dmg"
+  action :install
+end
+
+zip_app_package "Mou" do  
+  source "http://mouapp.com/download/Mou.zip"
+end
+
+dmg_package "Virtualbox" do  
+  source "http://dlc.sun.com.edgesuite.net/virtualbox/4.1.18/VirtualBox-4.1.18-78361-OSX.dmg"
+  type "mpkg"
+end  
+</code></pre>
+<p>For all my Unix tools I use the <a href="https://github.com/mathie/chef-homebrew">Homebrew cookbook</a>.</p>
+<p>This way I can specify all the packages I need in my node.json - the configuration file I use to run chef-solo.</p>
+<pre><code class="lang-ruby">{
+  "run_list": [
+      "recipe[main]",
+      "recipe[git]",
+      "recipe[rvm]",
+      "recipe[apps]"
+  ],
+
+  "packages" : [
+     "wget",
+     "tmux",
+     "watch",
+     "mobile-shell",
+     "imagemagick",
+     "solr",
+     "mysql",
+     "aspell",
+     "htmldoc",
+     "ghostscript",
+     "redis",
+     "pdftohtml"
+  ],
+
+  "homedir" : "/Users/shostakovich",
+  "user" : "shostakovich"
+}
+</code></pre>
+<h2 id="configuration">Configuration</h2>
+<p>I store most of my dotfiles on my Dropbox.</p>
+<p>When i set up a new machine i symlink them into my home directory. Last but not least, i change some defaults - for example to move the Dock out of the way..</p>
+<pre><code class="lang-ruby">template "#{node['homedir']}/.vimrc" do  
+  source "vimrc.erb"
+  owner node['user']
+end
+
+execute "set dock to be on left" do  
+  command "defaults write com.apple.dock orientation -string left"
+  user node['user']
+end
+
+execute "relaunch dock" do  
+  command "killall Dock"
+end  
+</code></pre>
+<p>`</p>
+<h2 id="howcanyougetstarted">How can you get started?</h2>
+<p>I highly recommend giving it a shot! It's a good way to learn chef.</p>
+<p>For a kick start with chef-solo, watch <a href="http://railscasts.com/episodes/339-chef-solo-basics">RailsCast 339</a>.</p>
+<p>If you have problems setting up chef-solo on a Mac, have a look at <a href="https://web.archive.org/web/20130703161040/http://woss.name/2011/01/23/converging-your-home-directory-with-chef/">how to fix solo.rb</a>.</p>
+<p>If you need further ideas, have a look at the  <a href="https://github.com/pivotal/pivotal_workstation">workstation setup of pivotal</a>.</p>
+<h2 id="theend">The end</h2>
+<p>I used this a couple of times already. Its kind of boring, to watch chef setting up your dev-machine. But hey - you can drink coffee in the meantime.</p>

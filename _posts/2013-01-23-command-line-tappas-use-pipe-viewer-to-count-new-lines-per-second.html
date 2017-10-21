@@ -1,0 +1,55 @@
+---
+layout: post
+status: publish
+published: true
+title: 'Command line tapas: Use Pipe Viewer to count new lines per second'
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 58
+wordpress_url: http://www.rocu.de/?p=58
+date: '2013-01-23 18:14:00 +0100'
+date_gmt: '2013-01-23 18:14:00 +0100'
+categories:
+- Uncategorized
+tags:
+- post
+comments:
+- id: 30
+  author: Brendan Loudermilk
+  author_email: bloudermilk@gmail.com
+  author_url: ''
+  date: '2014-01-07 21:46:39 +0100'
+  date_gmt: '2014-01-07 21:46:39 +0100'
+  content: <p>This was really helpful, thank you!</p>
+- id: 31
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2014-01-14 06:16:13 +0100'
+  date_gmt: '2014-01-14 06:16:13 +0100'
+  content: <p>Thank you for the praise ;)</p>
+---
+<p>Often I have to have a look at log files to see how a system behaves. For example recently I wanted to find out, how many points of interes per second were imported.</p>
+<p>I used to just count manually. But that didn't really scale well.</p>
+<p>So this is what I use now:</p>
+<pre><code>tail -f poi_log | pv -lr &gt;/dev/null
+</code></pre>
+<p>This command uses <a href="http://www.ivarch.com/programs/quickref/pv.shtml">PipeViewer</a> to find out how many lines are running through the pipe every second.</p>
+<p>What I really like about this is, that you can drill down even further if you use tools like grep. For example its trivial to find out how active bing is on your site.</p>
+<pre><code> tail -f access.log | grep "bingbot" | pv -lr -i 10 &gt;/dev/null
+ =&gt; [3.97/s ]
+</code></pre>
+<p>Before you give it a shot you have to install PipeViewer.</p>
+<p>Use</p>
+<pre><code>apt-get pv
+</code></pre>
+<p>on Ubuntu/Debian or</p>
+<pre><code>brew install pv
+</code></pre>
+<p>on a Mac.</p>
+<p>I hopy you like <strong>pv</strong> as much as I do. It's very simple &amp; focused and perfect in everyones toolbox.</p>

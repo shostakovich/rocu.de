@@ -1,0 +1,89 @@
+---
+layout: post
+status: publish
+published: true
+title: How to handle errors like a professional
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 10
+wordpress_url: http://www.rocu.de/?p=10
+date: '2013-06-06 19:44:00 +0200'
+date_gmt: '2013-06-06 19:44:00 +0200'
+categories:
+- Uncategorized
+tags:
+- bug
+- code
+- error
+- failure
+- post
+- programming
+- software
+comments: []
+---
+<p>As a good programmer you try to get as much feedback as possible. You use automated unit tests, code reviews and metrics. For me bugs and failures fall into the same category.</p>
+<p><img src="/assets/images/2013-06/failure.jpg" alt="" /><br />
+"Olivier Le Moal/Shutterstock.com"</p>
+<p>By embracing errors and working hard on avoiding them in the future, you can create a very resilient environment.</p>
+<p>In this article I want to explain how you can get the most out of your errors.</p>
+<h2 id="propertiesofagreaterror">Properties of a great error</h2>
+<p>Let's start with some properties, of a great error.</p>
+<ul>
+<li>You notice it as soon as possible</li>
+<li>You can minimize the impact</li>
+<li>You find out what exactly is wrong</li>
+<li>You learn from it and find a way to avoid it in the future</li>
+<li>You incorporate your learning into your routine</li>
+</ul>
+<h2 id="noticingproblemsassoonsaspossible">Noticing problems as soons as possible</h2>
+<p>Sometimes errors are really obvious. The website doesn't work at all. There is a typo in the imprint. You force pushed to master or you deleted a table in the database.</p>
+<p>But often errors are much more subtle. It's worth to consciously look out for problems. The more feedback from your application you can get the better.</p>
+<p>That's one reason, why you want good metrics of your applications. You could also monitor your logs and notify the team if something unusual is in there. Or you have a staging environment or/and a canary server. These are all ways to discover problems really fast.</p>
+<p>Whenever you notice that a problem went unnoticed for a really long time, this can indicate, that you could improve on that front.</p>
+<p>For example I have often seen programs that gulp all exceptions and do nothing with them. Oftentimes it is better to be notified and act on an individual basis, then just ignore the fact that something can go wrong.</p>
+<h2 id="keepingtheimpactoferrorsminimal">Keeping the impact of errors minimal</h2>
+<p>After you have discovered a problem - don't panic. Take a few deep breaths. Maybe even leave your desk for a minute. Get calm. Grab a coffee.</p>
+<p>Then get help. Tell your colleagues about the problem. Either one of them  already exactly knows what is happening or they are a great help at finding the problem.</p>
+<p>Even more important: Do not waste your energy to find out who has caused the bug. The person probably already knows ;)</p>
+<p>And hey: This is an opportunity to learn what happend and to fix the problem together.</p>
+<p>In case it's your own error admit it. Admiting errors is not only very professional, it also generates trust and reduces damage. It's also very likelly that you are the one person, who knows exactly where to look. So speak up!</p>
+<p>I trust colleagues, who admit errors and accept help - and so should you. They care and take responsibility. They know when to ask for help. No need for blaming.</p>
+<p>If you have the possibility to buy time - like rolling back to the last release or toggle a feature switch, you should do this first. The less stress you feel the faster you usually find the problem and the better is the quality of your fix.</p>
+<p>Additionally you avoid stupid mistakes if you are really relaxed. Often the situation is caotic and you need to maintain a relaxed oversight as long as you can.</p>
+<h2 id="youcanfindoutwhytheerrorhappened">You can find out why the error happened</h2>
+<p>If the cause isn't obvious you have to look for it. There are tons of ressources about troubleshooting out there.</p>
+<p>Some good ones include:</p>
+<ul>
+<li><a href="http://pragprog.com/book/pbdp/debug-it">Debug it! from PragProg</a></li>
+<li><a href="https://peepcode.com/products/troubleshooting">Troubleshooting, The Developer's #1 Skill</a></li>
+</ul>
+<p>Do not stop to early. Really try to find what happens. Even if the error is not that important or disappeared after a few hours - it is worth to understand what happened.</p>
+<p>For example once we noticed unusally high IO after a Rails update. It was not obvious that this was an error.  We didn't understand what happened and the system worked ok enough - but still something changed and we didn't get why.</p>
+<p>We looked into the issue and found that Rack was caching all our pages on disk. It was worth looking into it. This could have brought down our whole site during a traffic spike.</p>
+<h2 id="noteveryproblemisworthfixing">Not every problem is worth fixing</h2>
+<p>Not every problem is even worth fixing. But in order to do this assessment ,you need to understand what is going on.</p>
+<p>Sometimes a seemingly simple errors, upon further investigation, turn out to be much bigger than anticipated.</p>
+<h2 id="thereissomethingtolearnandyoulearnit">There is something to learn and you learn it</h2>
+<p>Think about what you can learn from the error. This might be one thing for some problems, but more often you can learn multiple things from one error.</p>
+<p>For example take a syntax error that slipped onto production. The lessons could be:</p>
+<ul>
+<li>Why the fuck did not test catch it? We should write more tests..</li>
+<li>Why the hell did no one see this in the code review? Do we need to be more thourough? Or should we automatically run syntax checks?</li>
+<li>Why the hell did I check this in at Sunday at 03:00 am - maybe I should sleep more</li>
+</ul>
+<p>Try to come up with many reasons. No single one of them might be</p>
+<h2 id="avoiditinthefuture">Avoid it in the future</h2>
+<p>Now that you have identified, what you could improve - think about if you want to improve it. Try to act on it and avoid the same kind of problems in the future. Also share your insights and a nice description of the problem with other programmers online - or even better keep a little engineers diary and write this stuff down for yourself.</p>
+<p>If you use something like a team Wiki and you think you discovered a lesson - put it in there. The next colleague having a similar problem might thank you.</p>
+<p>A recent example for such a measure in our team is  the following: <br />
+I accidently force pushed to master. First I tried to stop myself soon enough but after being on a cruise I did it again. So I wrote a little git hook that prevents me from doing it. In the future. No force pushing to master from me since.</p>
+<p>Some of my colleagues also have installed this hook as a safe guard now.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>An error is no reason for blame - but an opportunity for improvment. Treat it as whar it is - just another kind of feedback that something in your process is not perfect yet.</p>
+<p>Incorporate this feedback wisely to avoid the same problems from occuring again. Share your lessons.</p>
+<p>How do you handle problems in your environment?</p>

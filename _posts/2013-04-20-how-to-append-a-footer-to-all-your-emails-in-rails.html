@@ -1,0 +1,71 @@
+---
+layout: post
+status: publish
+published: true
+title: How to append a footer to all your emails in Rails
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 6
+wordpress_url: http://www.rocu.de/?p=6
+date: '2013-04-20 12:00:00 +0200'
+date_gmt: '2013-04-20 12:00:00 +0200'
+categories:
+- Uncategorized
+tags:
+- code
+- email
+- post
+- programming
+- rails
+- ruby
+comments: []
+---
+<p>In Germany and many other countries as a company you are required to add a legal footer to your emails.</p>
+<p>Of course you could just add the legal snippet into the footer of each of your emails.</p>
+<p>Or you can create a partial and include it.</p>
+<p>But theres a better way.</p>
+<h2 id="writingthetest">Writing the test</h2>
+<p>So let's start with a test.</p>
+<pre><code class="lang-ruby ">require 'spec_helper'
+
+class FakeMailer &lt; ActionMailer::Base  
+  def any_email
+    mail(from: 'a@example.com', to: 'b@example.com', subject: "Hello", body: 'A body')
+  end
+end
+
+describe 'Email Signature' do  
+  it 'appends a signature to every email' do
+    signature_divider = "-- n"
+
+    email = FakeMailer.any_email.deliver
+    email.body.to_s.should match(signature_divider)
+  end
+end  
+</code></pre>
+<p>This fails of course. I did match on the signature divider which contains of 2 dashes, a space and a newline. This is a old convention from the Newsnet and can be automatically parsed by many email clients.</p>
+<h2 id="theimplementation">The implementation</h2>
+<p>An elegant way of solving this is to implement an mail interceptor.</p>
+<p>An interceptor catches mails that are send and can modify their content.</p>
+<pre><code class="lang-ruby ">class EmailSignature  
+  def self.delivering_email(message)
+    message.body = String(message.body) + footer
+  end
+
+  def self.footer
+    "-- n" +  "Insert your footer here"
+  end
+end  
+Mail.register_interceptor(EmailSignature)  
+</code></pre>
+<p>The interceptor in our case appends the footer to the body of the message. It needs to be registered with</p>
+<pre><code>Mail.register_interceptor
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>This is a very simple way to add a footer to all your text emails.</p>
+<p>It does not take into account HTML emails and email's with multiple parts. (Though it's no black magic to modify the code.)</p>

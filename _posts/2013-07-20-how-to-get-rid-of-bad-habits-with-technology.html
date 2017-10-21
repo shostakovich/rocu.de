@@ -1,0 +1,101 @@
+---
+layout: post
+status: publish
+published: true
+title: Fighting bad habits with technology
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 32
+wordpress_url: http://www.rocu.de/?p=32
+date: '2013-07-20 19:19:00 +0200'
+date_gmt: '2013-07-20 19:19:00 +0200'
+categories:
+- Uncategorized
+tags:
+- command line
+- post
+- productivity
+- programming
+- twitter
+- vim
+comments:
+- id: 45
+  author: julian_b
+  author_email: julian_boyce@hotmail.com
+  author_url: ''
+  date: '2013-08-29 07:18:43 +0200'
+  date_gmt: '2013-08-29 07:18:43 +0200'
+  content: <p>nice!</p>
+---
+<p><p>I keep a list of stuff to improve. Whenever I catch something stupid it lands in there.</p>
+<p>I try to get rid of these bad habits.</p>
+<p>Often I find myself unable to solve the problem with willpower alone. Then I search for a solution that assists me. Maybe a little "barrier" or some kind of reminder. Let me show you, what I mean with this..</p>
+<h3 id="lookingatthekeysallthetime">Looking at the keys all the time</h3>
+<p>When I started to program 5 years ago I looked onto my keyboard all the time. Sure - typing faster does not make you a better programmer - but typing with 2 fingers is not ergonomic.</p>
+<p>I found a nice solution for my problem.</p>
+<p><img src="/assets/images/2013-07/das-keyboard.jpg" alt="" /></p>
+<p>I bought a keyboard without letters. I was so bad to hit the proper keys, that nudged me towards learning it right. I have to admit though that I still have problems with some special keys ;)</p>
+<h3 id="notmovingenoughduringwork">Not moving enough during work</h3>
+<p>Like most people I had the problem that I did not take enough breaks. This was hard to change.</p>
+<p>I started to work in Pomodoros (25 minutes of work and 5 minutes of break). Unfortunately I still did not leave my working space often enough.</p>
+<p>So I took another iteration and added added a little AppleScript to my Pomodoro App..</p>
+<p><img src="/assets/images/2013-07/pomodoro.jpg" alt="" /></p>
+<p>After each Pomodoro my Pomodoro timer executes <a href="http://www.rocu.de/lock-your-mac-from-the-command-line/">a little script that locks my Mac</a> ;)</p>
+<h3 id="surfingtheweballthetime">Surfing the web all the time</h3>
+<p>Unfortunately I am addicted to the internet. I am pretty OK with it most of the time — but not, when I want to be productive.</p>
+<p>That's why i wrote a <a href="http://www.rocu.de/script-to-disable-internet-connectivity-for-mac-os-x/">little script that blocks my internet access</a>.</p>
+<pre><code>#!/bin/bash
+echo "Enough of this filthy internet" | cowsay -s
+sudo route -n delete default &amp;&gt; /dev/null
+</code></pre>
+<p>If I need to be more specific with the site I need to block, I use a program called <a href="http://www.selfcontrolapp.com/">SelfControl</a>.</p>
+<p>This works great! Of course as a computer guy I could circumvent this — but I do not want to.</p>
+<h3 id="forcepushingtomaster">Force pushing to master</h3>
+<p>It happened frequently that I forced pushed to master. This was really annoying for me.</p>
+<p><img src="/assets/images/2013-07/force-push.jpg" alt="" /><br />
+Image Source:  Flickr / <a href="http://www.flickr.com/photos/pasukaru76/">Pascal</a> (<a href="http://creativecommons.org/licenses/by/2.0/deed.de">CC BY 2.0</a>)</p>
+<p>My colleague <a href="http://blog.nistu.de/">Nikolay</a> proposed to fix it with a script. <a href="http://www.rocu.de/how-to-prevent-yourself-from-force-pushing-to-master/">That's just what I did</a>.</p>
+<p>I have not force pushed to master since. This script is now also in use at some of my colleagues.</p>
+<h3 id="checkingworkingemailathome">Checking working email at home</h3>
+<p>I checked working email at home. I love my work to much to let my fingers from it - but I realize that I need time of it in order to rest.</p>
+<p><img src="/assets/images/2013-07/email.jpg" alt="" /><br />
+Image Source:  Flickr / <a href="http://www.flickr.com/photos/tamaleaver/">Tama Leaver</a> (<a href="http://creativecommons.org/licenses/by/2.0/deed.de">CC BY 2.0</a>)</p>
+<p>There's a simple remedy for not reading work related emails at home: Delete the freaking email account on your computers at home. It's baffling how often you will look into your empty email-client thereafter..</p>
+<h3 id="checkingtwitterreallyoften">Checking Twitter really often</h3>
+<p><img src="/assets/images/2013-01/tweetbot_filter.jpg" alt="" /></p>
+<p>There's so much chatter at Twitter. I checked Twitter hourly. Here's what I did:</p>
+<ul>
+<li>Remove people that write to much</li>
+<li>Add a URL block-filter</li>
+<li>
+<p>Delete Twitter from my iPhone</p>
+<p>This works really well for me.</p>
+</li>
+</ul>
+<h3 id="notusingarrowkeysinvim">Not using arrow keys in VIM</h3>
+<p>Another stupid habit of mine was, that I used the arrow keys in order to move in VIM.</p>
+<p>This was pretty simple to fix: I disabled them!</p>
+<pre><code> not use the arrow keys any more
+ nnoremap &lt;up&gt;    &lt;nop&gt;
+ nnoremap &lt;down&gt;  &lt;nop&gt;
+ nnoremap &lt;left&gt;  &lt;nop&gt;
+ nnoremap &lt;right&gt; &lt;nop&gt;
+ inoremap &lt;up&gt;    &lt;nop&gt;
+ inoremap &lt;down&gt;  &lt;nop&gt;
+ inoremap &lt;left&gt;  &lt;nop&gt;
+ inoremap &lt;right&gt; &lt;nop&gt;
+</code></pre>
+<p>It took only a week until I was not trying to hit them any more ;)</p>
+<h3 id="beingtodigital">Being to digital</h3>
+<p>Another problem of me is, that I use all my electronic devices to much. Here is what I build to prevent this: <strong>Productivity Protector 2000</strong>.</p>
+<p><img src="/assets/images/2013-07/productivity-protector.jpg" alt="" /></p>
+<p>It works.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>What is my point to show you this little collection of personal hacks?</p>
+<p>Do not be a victim of you're bad habits.</p>
+<p>As Nerd we have superpowers: We analyze problems. We solve them. All day long. Start applying these skills to the rest of your life!</p>

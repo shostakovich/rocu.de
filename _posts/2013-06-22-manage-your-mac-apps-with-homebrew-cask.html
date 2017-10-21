@@ -1,0 +1,199 @@
+---
+layout: post
+status: publish
+published: true
+title: Manage your Mac Apps with homebrew-cask
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 16
+wordpress_url: http://www.rocu.de/?p=16
+date: '2013-06-22 11:32:00 +0200'
+date_gmt: '2013-06-22 11:32:00 +0200'
+categories:
+- Uncategorized
+tags:
+- alfred
+- command line
+- devops
+- dotfiles
+- mac
+- mac os x
+- post
+comments:
+- id: 33
+  author: Zaki Juhari
+  author_email: sayhello@zakijuhari.com
+  author_url: ''
+  date: '2013-08-28 13:03:12 +0200'
+  date_gmt: '2013-08-28 13:03:12 +0200'
+  content: <p>Hi Robert,</p><p>Firstly, thank you for writing on homebrew-cask. I
+    was looking around to find an easy way to setup a Mac from a fresh install, and
+    your articles(including homesick) have been a great help.</p><p>I was wondering
+    though if you know how homebrew-cask manage the installers for the downloaded
+    applications.</p><p>For now, I just go to /Library/Cache/Homebrew and manually
+    delete the files. Is there a way to thrash all the installers after installing
+    the applications?</p>
+- id: 34
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-08-28 16:28:41 +0200'
+  date_gmt: '2013-08-28 16:28:41 +0200'
+  content: <p>Hi Zaki. Thanks for the praise.</p><p>Homebrew-cask uses brew itself
+    to manage the cache.</p><p>    $ brew cleanup -s</p><p>Should do the job.</p><p>If
+    you want to automate this you can use:</p><p>     $ rm -rf $(brew --cache)</p><p>You
+    find further informations on the man page of homebrew:</p><p>  $  man brew</p>
+- id: 35
+  author: Giovanni
+  author_email: giofilo@gmail.com
+  author_url: ''
+  date: '2014-01-03 12:09:25 +0100'
+  date_gmt: '2014-01-03 12:09:25 +0100'
+  content: <p>Hi Robert,</p><p>Your post convinces me to use homebrew cask, thanks
+    for it.<br>Do you know what to do when an app has an update?<br>Do I have to "brew
+    update" or simply update the app as usual?</p><p>For example, in Google Chrome
+    I click "Update Google Chrome" when there is an update. But I would know if it's
+    the right way to update.</p>
+- id: 36
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2014-01-03 16:33:53 +0100'
+  date_gmt: '2014-01-03 16:33:53 +0100'
+  content: '<p>There was some discussion about adding this to homebrew cask a while
+    ago, but no work was done yet.</p><p><a href="https://github.com/phinze/homebrew-cask/issues/1272"
+    rel="nofollow">https://github.com/phinze/home...</a></p><p>You can update apps
+    in via:</p><p>    $ brew cask install --force app-name</p><p>The problem: many
+    download urls are version specific, since not all applications have urls for the
+    latest version.</p><p>For these apps the download url has to be changed to the
+    current one, whenever a new version comes out. That''s why these Casks usually
+    lag behind.</p><p>Currently it''s best to use the update mechanisms of the apps
+    themselves. (Especially in case of security patches etc.)</p>'
+- id: 37
+  author: Giovanni
+  author_email: giofilo@gmail.com
+  author_url: ''
+  date: '2014-01-03 16:40:47 +0100'
+  date_gmt: '2014-01-03 16:40:47 +0100'
+  content: <p>All right! Thank you, Robert.</p>
+- id: 38
+  author: Colin Dean
+  author_email: cad@cad.cx
+  author_url: ''
+  date: '2014-06-06 11:54:01 +0200'
+  date_gmt: '2014-06-06 11:54:01 +0200'
+  content: '<p>Update: The repository has moved to <a href="https://github.com/caskroom/homebrew-cask"
+    rel="nofollow">https://github.com/caskroom/ho...</a>. You''ll need to migrate,
+    and instructions are available at that URL how to migrate. If you''ve not already
+    tapped phinze/homebrew-cask, you can just do `brew tap caskroom/cask`.</p>'
+- id: 39
+  author: Stephen Benner
+  author_email: sbenner9@gmail.com
+  author_url: ''
+  date: '2014-08-12 03:58:25 +0200'
+  date_gmt: '2014-08-12 03:58:25 +0200'
+  content: '<p>Zaki Juhari It''s been awhile since this was first posted, but I just
+    wanted to share a CLI script that I made specifically to uninstall Homebrew, as
+    well as other helpful little things like finding Homebrew-related files on your
+    system. It''s been working fantastically, and has had good reception from the
+    community so far. I encourage anyone who uses Homebrew to check it out!</p><p>The
+    gist can be found <a href="https://gist.github.com/SteveBenner/11254428" rel="nofollow">here</a>.</p><p>P.S.
+    Geez. The link I posted has literally no discernable styling - in case anyone
+    missed the link on word ''here'', I present the URL: <a href="https://gist.github.com/SteveBenner/11254428"
+    rel="nofollow">https://gist.github.com/SteveB...</a></p>'
+- id: 40
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2014-08-12 05:17:45 +0200'
+  date_gmt: '2014-08-12 05:17:45 +0200'
+  content: <p>Thanks for the link Stephen :)</p>
+- id: 153
+  author: Mochamad Iqbal Dwi Cahyo
+  author_email: razeluxe20@gmail.com
+  author_url: ''
+  date: '2016-03-02 05:57:58 +0100'
+  date_gmt: '2016-03-02 05:57:58 +0100'
+  content: Thanks, nice articles! :)
+---
+<p>A while ago I became interested in automating the setup of my Macs. <a href="http://www.rocu.de/how-to-setup-your-mac-automatically-with-chef/">I started my journey with chef-solo</a>, however this wasn't really practical for me, so I <a href="http://www.rocu.de/manage-and-share-your-dotfiles-with-homesick/">switched to homesick</a> to manage my dotfiles.</p>
+<p>Unfortunately that left me without a solution to install my apps automatically.</p>
+<p>Not any more. <a href="https://github.com/phinze/homebrew-cask">homebrew-cask</a> to the rescue!</p>
+<p><img src="/assets/images/2013-06/casks.jpg" alt="Take a walk" /></p>
+<p><em>Image Source: <a href="http://www.flickr.com/photos/megoizzy/">Flickr/megoizzy</a> (CC BY-SA 2.0)</em></p>
+<h2 id="whatishomebrewcask">What is homebrew-cask</h2>
+<p><a href="https://github.com/phinze/homebrew-cask">homebrew-cask</a> is a <a href="https://github.com/mxcl/homebrew">Homebrew</a> extension that allows you to install your apps like this:</p>
+<pre><code>brew cask install evernote
+</code></pre>
+<h2 id="howtoinstallhomebrewcask">How to install homebrew-cask</h2>
+<p>If you already use homebrew, installing homebrew-cask is really simple:</p>
+<pre><code>brew tap phinze/homebrew-cask
+brew install brew-cask
+</code></pre>
+<p>If you have <a href="http://www.alfredapp.com/">Alfred</a> installed you should also configure it, so that it recognizes apps managed by homebrew-cask.</p>
+<pre><code>brew cask alfred link
+</code></pre>
+<h2 id="usinghomebrewcask">Using homebrew-cask</h2>
+<p>Using homebrew-cask is simple. You install apps using the <strong>brew cask install</strong> command.  Evernote for example, you would install like this:</p>
+<pre><code>brew cask install evernote
+</code></pre>
+<h2 id="createalittlescripttoinstallyourapps">Create a little script to install your Apps</h2>
+<p>I store all my apps in a file called <strong>~/.brew</strong>. In order to install the apps I just have to run it.</p>
+<p>This is how you create your own:</p>
+<pre><code>touch ~/.brew
+chmod +x ~/.brew
+</code></pre>
+<p>Now fill it with the Apps you want to install across all your Mac's.</p>
+<p>For me this looks like:</p>
+<pre><code>#!/bin/bash
+brew cask install google-chrome  
+…
+brew cask install rubymine  
+brew cask install charles  
+brew cask install mou  
+brew cask install bit-torrent-sync  
+</code></pre>
+<p>I <a href="https://github.com/shostakovich/dotfiles/blob/master/home/.brew">have this file on GitHub</a> and symlink it with homesick. When I am on a new Mac I just have to run</p>
+<pre><code>~/.brew
+</code></pre>
+<p>That installs all my common apps.</p>
+<h2 id="createowncasks">Create own casks</h2>
+<p>There are over 300 casks available already. You can view a list with</p>
+<pre><code>brew cask search
+</code></pre>
+<p>If your favorite app is missing it is really simple to add it.</p>
+<p>In the example below I create a Cask for Soulver.</p>
+<pre><code>brew cask create soulver
+</code></pre>
+<p>An editor opens with the newly generated cask.</p>
+<pre><code>class Soulver &lt; Cask  
+   url ''
+   homepage ''
+   version ''
+   sha1 ''
+   link ''
+end  
+</code></pre>
+<p>You just have to fill in the download URL of the app, the apps name, the version, the sha1 checksum of the download and it's homepage.</p>
+<pre><code>class Soulver &lt; Cask  
+  url 'http://www.acqualia.com/files/download.php?product=soulver'
+  homepage 'http://www.acqualia.com/soulver/'
+  version 'latest'
+  no_checksum
+  link 'Soulver.app'
+end  
+</code></pre>
+<p>In Soulver's case the download URL does always refer to the latest version. So in this case I used <strong>no_checksum</strong>, so that this Cask will not break in the future.</p>
+<p>Now audit your cask:</p>
+<pre><code>$ brew cask audit soulver
+audit for soulver: passed
+</code></pre>
+<p>Now you can install Soulver. And don't forget to open a pull request ;)</p>
+<p>Before you do — check the latest <a href="https://github.com/phinze/homebrew-cask/blob/master/CONTRIBUTING.md">contribution guidelines</a>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I am really happy that <a href="https://github.com/phinze/homebrew-cask">homebrew-cask</a> exists now. It closed a gap in my configuration management. I can set up a new Mac in no time. I hope you enjoy it as much as I do.</p>

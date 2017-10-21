@@ -1,0 +1,70 @@
+---
+layout: post
+status: publish
+published: true
+title: How to not use the arrow keys any more in vim
+author:
+  display_name: rocu
+  login: rocu
+  email: robert@rocu.de
+  url: ''
+author_login: rocu
+author_email: robert@rocu.de
+wordpress_id: 22
+wordpress_url: http://www.rocu.de/?p=22
+date: '2013-07-05 19:11:00 +0200'
+date_gmt: '2013-07-05 19:11:00 +0200'
+categories:
+- Uncategorized
+tags:
+- arrow keys
+- command line
+- post
+- vim
+comments:
+- id: 41
+  author: sideshowcoder
+  author_email: philipp.fehre@gmail.com
+  author_url: ''
+  date: '2013-07-06 16:02:15 +0200'
+  date_gmt: '2013-07-06 16:02:15 +0200'
+  content: <p>Next step make them do something actually useful :) I set mine to window
+    resize. We should exchange some Vim tips at rubyshift sometime :)</p>
+- id: 42
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2013-07-06 17:57:39 +0200'
+  date_gmt: '2013-07-06 17:57:39 +0200'
+  content: <p>Very cool idea - i just discovered your ~/.vimrc — Good read ;)</p>
+- id: 43
+  author: romaintb
+  author_email: romain@doxin.net
+  author_url: ''
+  date: '2014-01-13 11:13:08 +0100'
+  date_gmt: '2014-01-13 11:13:08 +0100'
+  content: <p>so ? how is it going so far ? never came back ?<br>I still use them
+    some times ....</p>
+- id: 44
+  author: Robert Curth
+  author_email: robert@rocu.de
+  author_url: ''
+  date: '2014-01-14 06:15:46 +0100'
+  date_gmt: '2014-01-14 06:15:46 +0100'
+  content: '<p>Never came back. Though this is confusing sometimes: when I work in
+    other editors and I am tired I don''t use the arrow keys ;)</p>'
+---
+<p>I try to wrap my head around the <a href="http://www.vim.org/">VIM</a> editor since a few months. Unfortunately I do not have enough discipline to use h-j-k-l as my movement keys. But there is a solution that will teach me..</p>
+<p>I found it deep inside the .vimrc of my colleague Fabian.</p>
+<pre><code>nnoremap &lt;up&gt;    &lt;nop&gt;  
+nnoremap &lt;down&gt;  &lt;nop&gt;  
+nnoremap &lt;left&gt;  &lt;nop&gt;  
+nnoremap &lt;right&gt; &lt;nop&gt;  
+inoremap &lt;up&gt;    &lt;nop&gt;  
+inoremap &lt;down&gt;  &lt;nop&gt;  
+inoremap &lt;left&gt;  &lt;nop&gt;  
+inoremap &lt;right&gt; &lt;nop&gt;  
+</code></pre>
+<p>This turns off the arrow keys. A really obvious way of doing it ;)</p>
+<p>I will add this to my <a href="https://github.com/shostakovich/dotfiles/blob/master/home/.vimrc">.vimrc</a> right away!</p>
+<p>Wish me luck!</p>
