@@ -14,15 +14,18 @@
 
     {% include inline_styles.html %}
 
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/assets/main.css" />
+
 </head>
 <body>
     <div id="l-wrapper">
+        <h1>{{ page.title }}</h1>
         {{ content }}
 
-        <nav id="l-nav">
+        <nav id="l-nav" class="nav-black">
             <a href="/"><strong>{{ site.title }}</strong></a>
-            <a href="/ueber-mich">Über mich</a>
-            <a href="/imprint">Impressum</a>
+            <a href="/about-me">About me</a>
+            <a href="/projects">Projects</a>
         </nav>
     </div>
 </body>

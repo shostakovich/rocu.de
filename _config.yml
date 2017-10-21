@@ -24,7 +24,12 @@ markdown: kramdown
 author: Robert Curth
 
 permalink: "/:title"
+paginate_path: "/archiv/:num/"
+paginate: 10
 
 
 sass:
   style: compressed
+
+plugins:
+  - jekyll-paginate

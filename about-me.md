@@ -1,34 +1,23 @@
 ---
-title: Über mich
-permalink: /ueber-mich/
+title: About me (Robert Curth)
 layout: default
 ---
 
-# Über mich
-
-Hi. My name is Robert Curth. I am 29 years old and live in Munich (Germany).
+Hi. My name is Robert Curth. I am 33 years old and live in Munich (Germany).
 
 ## Programmer
 
-I am a programmer at Gutefrage.net. I program in Ruby (on Rails) these days on [helpster.de](http://www.helpster.de) and [pointoo.de](http://www.pointoo.de).
-
-Since we take care of our own infrastructure, I also know a little bit about Chef and server configuration.
-
-## Cultural hacker
-
-I boost our company culture by organizing events and bringing people together.
-
-I also established some regular events at Gutefrage like the OpenHack Munich, our IT drinkup, a group where we polish our presentation skills, a company wide lunch and some more.
-
-Great company cultures exist, because people just start living them. I try to do this.
+I am a part-time programmer at [ARRI](http://www.arri.com) and a worker-owner at [Techgenossen](https://techgenossen.de/).
+ 
+ I program in Ruby (on Rails) these days on [ARRI Webgate](https://arriwebgate.com/) and various Techgenossen projects.
 
 ## Traveler
 
-I travel a lot. I visited ~33 countries during my lifetime. Most of them in the last 3 years.
+I travel a lot. I visited ~45 countries during my lifetime. Most of them in the last 3 years.
 
 I think that traveling, made me a better person.
 
-![](/content/images/uploads/2013-08/antartica.jpg)
+![](/assets/images/2013-08/antartica.jpg)
 
 This is me eating ice, while watching onto the Antarctica peninsula. To understand my facial expression, you should know that I am on a low carb diet and was kind of surprised .
 
@@ -40,7 +29,7 @@ I try to be systematic about it — you can follow my progress on [Lift](http://
 
 ## Places you can find me
 
-![](/content/images/uploads/me_hiding_from_the_creepers.jpg)
+![](/assets/images/me_hiding_from_the_creepers.jpg)
 
 *   Github ([shostakovich](https://github.com/shostakovich))
 *   Twitter ([zircde](https://twitter.com/zircde))

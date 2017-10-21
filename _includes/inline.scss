@@ -8,30 +8,43 @@ html {
   padding: 1rem;
 }
 
+img {
+  max-width: 100%;
+  padding: 5px;
+  border: 1px solid #cccccc;
+  background: #f1f1f1;
+  box-sizing: border-box;
+}
+
 #l-wrapper, #l-nav {
-  max-width: 800px;
+  max-width: 676px;
   margin: 0 auto;
+  box-sizing: border-box;
   padding: 1rem;
-  background: #ffffff;
 }
 
 #l-wrapper {
   position: relative;
   padding-top: 46px;
+  background: #ffffff;
 }
+
 
 #l-nav {
   position: absolute;
   top: 0;
   left: 0;
-  height: 1rem;
+}
+
+.nav-black {
+  box-sizing: border-box;
+  color: #ffffff;
   width: 100%;
   background: #212121;
+  padding: 1rem;
 
   > a, a:hover {
     margin-right: 0.75em;
     color: #ffffff;
   }
-
 }
-
