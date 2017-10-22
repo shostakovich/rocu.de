@@ -17,7 +17,7 @@ For our development environment we use Mailcatcher.
 
 In this blogpost I show you how we set it up in our projects.
 
-Mailcatcher is an awesome way to preview all the mails your Rails App sends in the developent environment. In this blog post I show you how you can set it up.
+Mailcatcher is an awesome way to preview all the mails your Rails App sends in the development environment.
 
 ## Installation
 
@@ -63,7 +63,7 @@ You can toggle between the HTML and the text portion of the email and even inspe
 
 ## And what if I do not use Rails?
 
-Well good news for you. You can also use MailCatcher.
+Good news for you. You can also use MailCatcher without Rails.
 
 1. Just install MailCatcher via `gem install mailcatcher`
 2. Point your application to send mails via SMTP to port `1025`.
