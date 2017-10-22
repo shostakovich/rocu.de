@@ -25,18 +25,13 @@ This is me eating ice, while watching onto the Antarctica peninsula. To understa
 
 After work I try to invest into my skills and mind. That means: I exercise, meditate and do all other kinds of crazy stuff.
 
-I try to be systematic about it — you can follow my progress on [Lift](http://lift.do/users/cbafd621538e209c5b95).
-
 ## Places you can find me
 
 ![](/assets/images/me_hiding_from_the_creepers.jpg)
 
 *   Github ([shostakovich](https://github.com/shostakovich))
-*   Twitter ([zircde](https://twitter.com/zircde))
+*   Twitter ([robert_curth](https://twitter.com/robert_curth))
 *   Codeschool ([rocu](http://www.codeschool.com/users/rocu))
-*   Zipfelmaus ([rocu](http://www.zipfelmaus.com))
-*   App.net ([rocu](https://alpha.app.net/rocu))
+*   Tinkr ([rocu](https://tinkr.de/))
 *   Xing ([Robert Curth](http://www.xing.com/profile/Robert_Curth))
-*   Google+ ([Robert Curth](https://plus.google.com/100361028306639573183))
 *   Vimeo ([Robert Curth](http://vimeo.com/user2044831))
-*   Lift ([Robert Curth](http://lift.do/users/cbafd621538e209c5b95))
