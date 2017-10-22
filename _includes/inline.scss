@@ -1,6 +1,10 @@
 $base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $base-font-size:   16px;
 
+$color-background: #f1f1f1;
+$color-dark: #212121;
+$border: 1px solid #ccc;
+
 html {
   font-family: $base-font-family;
   font-size: $base-font-size;
@@ -21,13 +25,32 @@ html {
 img {
   max-width: 100%;
   padding: 5px;
-  border: 1px solid #cccccc;
-  background: #f1f1f1;
+  border: $border;
+  background: $color-background;
   box-sizing: border-box;
 }
 
 pre {
   white-space:pre-wrap;
+}
+
+blockquote {
+  background: $color-background;
+  border-left: $border;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: $color-dark;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
 }
 
 #l-wrapper, #l-nav {
@@ -54,7 +77,7 @@ pre {
   box-sizing: border-box;
   color: #ffffff;
   width: 100%;
-  background: #212121;
+  background: $color-dark;
   padding: 1rem;
 
   > a, a:hover {
