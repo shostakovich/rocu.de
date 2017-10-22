@@ -27,6 +27,7 @@ permalink: "/:title"
 paginate_path: "/archiv/:num/"
 paginate: 10
 
+host: 0.0.0.0
 
 sass:
   style: compressed

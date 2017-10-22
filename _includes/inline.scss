@@ -2,7 +2,7 @@ $base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $base-font-size:   16px;
 
 $color-background: #f1f1f1;
-$color-dark: #212121;
+$color-dark: #1b5bc1;
 $border: 1px solid #ccc;
 
 html {
@@ -28,6 +28,10 @@ img {
   border: $border;
   background: $color-background;
   box-sizing: border-box;
+}
+
+a {
+  color: $color-dark;
 }
 
 pre {
