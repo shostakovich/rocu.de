@@ -3,6 +3,7 @@ layout: default
 status: publish
 published: true
 title: 'The little things matter: fortune | cowsay'
+image: /assets/images/2014-07/cowsay.png
 ---
 
 ```
