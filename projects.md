@@ -27,13 +27,6 @@ ARRI Webgate allows Video Producers to upload videos and videos and files and ke
 
 The Lunch-O-Mat connects colleagues over lunches. It is one of my current projects.
 
-### Lunch-O-Mat
-
-![lunch-o-mat](/assets/images/2015/04/lunch-o-mat-676x467.png)
-
-The Lunch-O-Mat connects colleagues over lunches. It is one of my current projects.
-
-
 ## Discontinued Projects
 
 ### Risikolebensversicherung / Check24
