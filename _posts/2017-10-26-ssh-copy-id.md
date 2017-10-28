@@ -3,6 +3,7 @@ layout: default
 status: publish
 published: true
 title: "Command line tapas: How to install your SSH key on a remote server"
+abstract: Logging onto your servers using username / password? Then maybe you should install your SSH key.
 ---
 
 ## 1. Nice way
