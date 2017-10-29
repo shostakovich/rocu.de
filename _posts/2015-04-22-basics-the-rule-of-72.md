@@ -13,11 +13,11 @@ It closes the gap between an interest rate and what it means in real life.
 
 Here is the rule of 72:
 
-<span class="MathJax_Preview">![t approx frac{72}{p} ~text{years}](https://one-step-at-a-time.net/wp-content/plugins/latex/cache/tex_a25562b811b9ff44440a66230e4845c4.gif)</span><script type="math/tex">t approx frac{72}{p} ~text{years}</script>
+    t = 72 / Interest Rate in percent
 
 So how long would your money need to double with an interest rate of 7%? (Average historical inflation-adjusted stock market return)
 
-<span class="MathJax_Preview">![frac{72}{7} approx 10 text{ years}](https://one-step-at-a-time.net/wp-content/plugins/latex/cache/tex_86ccccb847ddc1dafdb2f5a691a3706c.gif)</span><script type="math/tex">frac{72}{7} approx 10 text{ years}</script>
+    72 / 7 = 10 years
 
 ## Double your money within 10 years?
 
@@ -33,7 +33,7 @@ Compounding can also work against you.
 
 Say you have a credit card and it charges a 15% interest rate. How fast will the amount you owe be doubled?
 
-<span class="MathJax_Preview">![frac{72}{15} approx 5 text{ years}](https://one-step-at-a-time.net/wp-content/plugins/latex/cache/tex_55b7cdb7a22bba4d9bfc0268dd8a1487.gif)</span><script type="math/tex">frac{72}{15} approx 5 text{ years}</script>
+    72 / 15 = 5 years
 
 This is insanity as you see. Even if you are required to pay off some of the principal every month.
 

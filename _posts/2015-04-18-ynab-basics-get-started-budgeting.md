@@ -233,8 +233,6 @@ The mobile app has 2 basic features.
 
 Let me show you how to add a transaction.
 
-![IMG_3466](https://one-step-at-a-time.net/wp-content/uploads/sites/3/2015/04/IMG_3466-200x300.jpg)    [![IMG_3467](https://one-step-at-a-time.net/wp-content/uploads/sites/3/2015/04/IMG_3467-200x300.jpg)](http://one-step-at-a-time.net/wp-content/uploads/sites/3/2015/04/IMG_3467.jpg)
-
 1.  Click "Add Transaction"
 2.  Enter the amount of money
 3.  Click "Next"
