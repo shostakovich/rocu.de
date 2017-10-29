@@ -3,7 +3,10 @@ title: About me (Robert Curth)
 layout: default
 ---
 
+![](/assets/images/2017/11/robert-curth.jpg)
+
 Hi. My name is Robert Curth. I am 33 years old and live in Munich (Germany).
+
 
 ## Programmer
 
@@ -13,13 +16,7 @@ I am a part-time programmer at [ARRI](http://www.arri.com) and a worker-owner at
 
 ## Traveler
 
-I travel a lot. I visited ~45 countries during my lifetime. Most of them in the last 3 years.
-
-I think that traveling, made me a better person.
-
-![](/assets/images/2013-08/antartica.jpg)
-
-This is me eating ice, while watching onto the Antarctica peninsula. To understand my facial expression, you should know that I am on a low carb diet and was kind of surprised .
+I travel a lot. I visited ~45 countries during my lifetime. Most of them in the last 5 years.
 
 ## Self-improver
 
@@ -27,7 +24,6 @@ After work I try to invest into my skills and mind. That means: I exercise, medi
 
 ## Places you can find me
 
-![](/assets/images/me_hiding_from_the_creepers.jpg)
 
 *   Github ([shostakovich](https://github.com/shostakovich))
 *   Twitter ([robert_curth](https://twitter.com/robert_curth))
