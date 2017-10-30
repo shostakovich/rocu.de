@@ -12,7 +12,7 @@ After I upgraded to Ubuntu 17.10 I was not able to share my entire screen in Goo
 
 This spoiled the upgrade for me.
 
-Fortunately the solution is quite simple: [Wayland](https://de.wikipedia.org/wiki/Wayland_(Anzeige-Server)) is the new default screen server and does not support fullscreen capture.
+Fortunately the solution is quite simple: [Wayland](https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)) is the new default screen server and does not support fullscreen capture.
 
 You can switch back to the XORG screen server: **On the login screen click the gear Icon and select "Ubuntu on XORG"**.
 
