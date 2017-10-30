@@ -14,6 +14,6 @@ This spoiled the upgrade for me.
 
 Fortunately the solution is quite simple: [Wayland](https://de.wikipedia.org/wiki/Wayland_(Anzeige-Server)) is the new default screen server and does not support fullscreen capture.
 
-You can switch back to the XORG screen server: On the login screen click the gear Icon and select "Ubuntu on XORG".
+You can switch back to the XORG screen server: **On the login screen click the gear Icon and select "Ubuntu on XORG"**.
 
 This resolves the issue.
