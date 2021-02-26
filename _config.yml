@@ -23,7 +23,7 @@ github_username:  shostakovich
 markdown: kramdown
 author: Robert Curth
 
-permalink: "/:title"
+permalink: "/:title/"
 paginate_path: "/archiv/:num/"
 paginate: 10
 
